@@ -1,40 +1,39 @@
 package QueenOfHeart.controller;
 
-import QueenOfHeart.model.Game;
-import QueenOfHeart.model.GameStatus;
-
 import QueenOfHeart.model.Player;
+import QueenOfHeart.model.Game;
 import QueenOfHeart.repository.IGameRepository;
 import QueenOfHeart.repository.IPlayerRepository;
 import hello.Greeting;
-import QueenOfHeart.model.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sun.net.www.content.text.PlainTextInputStream;
-
-import java.time.LocalDateTime;
 
 @RestController
-@RequestMapping(path = "/game")
-public class GameController {
+@RequestMapping(path = "/player")
+public class PlayerController {
+
+    @Autowired
+    private IPlayerRepository playerRepository;
     @Autowired
     private IGameRepository gameRepository;
 
-    @RequestMapping(path = "/add", method = RequestMethod.POST) // Map ONLY GET Requests
+    @RequestMapping(path = "/add", method = RequestMethod.POST)
     public @ResponseBody
-    Long addNewGame(@RequestParam String name) {
-        Game n = new Game();
-        n.setName(name);
-        gameRepository.save(n);
-        return n.getId();
+    Long addPlayerToGame(@RequestParam String name, @RequestParam long gameId) {
+        Game game = gameRepository.findById(gameId).get();
+        Player p = new Player(name, game);
+        game.addPlayer(p);
+        playerRepository.save(p);
+        return p.getId();
     }
 
     @GetMapping(path = "/all")
     public @ResponseBody
-    Iterable<Game> getAllGames() {
+    Iterable<Player> getAllPlayers() {
         // This returns a JSON or XML with the users
-        return gameRepository.findAll();
+        return playerRepository.findAll();
     }
+
 }

@@ -1,5 +1,7 @@
 package QueenOfHeart.model;
 
+import sun.net.www.content.text.PlainTextInputStream;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
@@ -17,14 +19,36 @@ public class Player {
 
     @NotNull
     private String name;
-    private int order;
+    @NotNull
+    private int position;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "GamePlayHistory",
-            joinColumns = {@JoinColumn(name = "player_id")},
-            inverseJoinColumns = {@JoinColumn(name = "game_id")}
-    )
-    private Set<GamePlayHistory> gamePlayes = new HashSet<>();
+    public Player() {
+    }
 
+    public Player(String name, Game game) {
+        this.name = name;
+        this.game = game;
+        this.position = game.getPlayers().size() + 1;
+    }
+
+    //    story> gamePlayes = new HashSet<>();
+    public String getName() {
+        return name;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public long getId() {
+        return id;
+    }
 }

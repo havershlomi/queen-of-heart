@@ -13,6 +13,6 @@
         <!-- <property name="hbm2ddl.auto">update</property> -->
         <mapping class="QueenOfHeart.model.Player"/>
         <mapping class="QueenOfHeart.model.Game"/>
-        <mapping class="QueenOfHeart.model.GamePlayHistory"/>
+        <!--<mapping class="QueenOfHeart.model.GamePlayHistory"/>-->
     </session-factory>
 </hibernate-configuration>

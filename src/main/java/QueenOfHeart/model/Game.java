@@ -1,10 +1,13 @@
 package QueenOfHeart.model;
+
+import sun.net.www.content.text.PlainTextInputStream;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.validation.constraints.Null;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Entity
 public class Game {
@@ -22,11 +25,17 @@ public class Game {
     private GameStatus status;
     private long losingPlayer;
 
-    @OneToMany(mappedBy = "game")
-    private List<Player> players;
+    public Game() {
+        this.setStatus(GameStatus.Ready);
+        this.setLosingPlayer(-1);
+        this.creationTime = getCurrentUtcTime();
+    }
 
-    @ManyToMany(mappedBy = "history", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    private Set<GamePlayHistory> history = new HashSet<>();
+    @OneToMany(mappedBy = "game")
+    private List<Player> players = new ArrayList<>();
+
+//    @ManyToMany(mappedBy = "history", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+//    private Set<GamePlayHistory> history = new HashSet<>();
 
     public String getName() {
         return name;
@@ -62,6 +71,29 @@ public class Game {
 
     public void setLosingPlayer(long losingPlayer) {
         this.losingPlayer = losingPlayer;
+    }
+
+    public List<Player> getPlayers() {
+        return this.players;
+    }
+
+    public void addPlayer(Player player){
+        this.players.add(player);
+    }
+
+    private Date getCurrentUtcTime() {
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        try {
+            return dateFormat.parse(dateFormat.format(date));
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    public long getId() {
+        return id;
     }
 }
 
