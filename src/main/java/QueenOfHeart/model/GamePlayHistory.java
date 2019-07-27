@@ -31,6 +31,7 @@ public class GamePlayHistory {
         this.card = card;
         this.game = game;
         this.player = player;
+        this.time = Utils.getCurrentUtcTime();
     }
 
     public int getCard() {
@@ -39,6 +40,14 @@ public class GamePlayHistory {
 
     public Date getTime() {
         return this.time;
+    }
+
+    public long getPlayerId(){
+        return this.player.getId();
+    }
+
+    public long getGameId(){
+        return this.game.getId();
     }
 
 

@@ -6,9 +6,11 @@ import QueenOfHeart.model.Player;
 import QueenOfHeart.repository.ICardRepository;
 import QueenOfHeart.repository.IGameRepository;
 import QueenOfHeart.repository.IPlayerRepository;
+import net.bytebuddy.TypeCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Random;
 
 @RestController
@@ -25,6 +27,7 @@ public class CardController {
     @RequestMapping(path = "/draw", method = RequestMethod.POST)
     public @ResponseBody
     int drawCard(@RequestParam long playerId, @RequestParam long gameId) {
+
         Game game = gameRepository.findById(gameId).get();
         Player player = playerRepository.findById(playerId).get();
 
@@ -37,9 +40,9 @@ public class CardController {
 
     @GetMapping(path = "/all")
     public @ResponseBody
-    Iterable<Player> getCardsForgame(@RequestParam long gameId) {
+    List<GamePlayHistory> getCardsForgame(@RequestParam long gameId) {
 
-        return playerRepository.findAll();
+        return cardRepository.getMovesForGame(gameId);
     }
 
 }

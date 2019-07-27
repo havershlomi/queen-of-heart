@@ -28,7 +28,7 @@ public class Game {
     public Game() {
         this.setStatus(GameStatus.Ready);
         this.setLosingPlayer(-1);
-        this.creationTime = getCurrentUtcTime();
+        this.creationTime = Utils.getCurrentUtcTime();
     }
 
     @OneToMany(mappedBy = "game")
@@ -77,19 +77,8 @@ public class Game {
         return this.players;
     }
 
-    public void addPlayer(Player player){
+    public void addPlayer(Player player) {
         this.players.add(player);
-    }
-
-    private Date getCurrentUtcTime() {
-        Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        try {
-            return dateFormat.parse(dateFormat.format(date));
-        } catch (ParseException e) {
-            return null;
-        }
     }
 
     public long getId() {
