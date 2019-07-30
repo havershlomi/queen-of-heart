@@ -4,12 +4,10 @@ import sun.net.www.content.text.PlainTextInputStream;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
-@Entity
+@Entity(name = "Game")
+@Table(name = "Games")
 public class Game {
 
     @Id
@@ -34,8 +32,14 @@ public class Game {
     @OneToMany(mappedBy = "game")
     private List<Player> players = new ArrayList<>();
 
-//    @ManyToMany(mappedBy = "history", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-//    private Set<GamePlayHistory> history = new HashSet<>();
+    @OneToMany(mappedBy = "game",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<GamePlayHistory> history = new ArrayList<>();
+
+    public List<GamePlayHistory> getHistory() {
+        return this.history;
+    }
 
     public String getName() {
         return name;
@@ -77,12 +81,23 @@ public class Game {
         return this.players;
     }
 
+
+    public long getId() {
+        return this.id;
+    }
+
     public void addPlayer(Player player) {
         this.players.add(player);
     }
 
-    public long getId() {
-        return id;
+    public void addPlay(GamePlayHistory gamePlayHistory) {
+        history.add(gamePlayHistory);
+        gamePlayHistory.setGame(this);
+    }
+
+    public void removePlay(GamePlayHistory gamePlayHistory) {
+        history.remove(gamePlayHistory);
+        gamePlayHistory.setGame(null);
     }
 }
 

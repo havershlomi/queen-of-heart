@@ -5,14 +5,16 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.util.Date;
 
-@Entity
+@Entity(name="GamePlayHistory")
+@Table(name = "game_play_history")
 public class GamePlayHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "game_id")
     private Game game;
 
     @OneToOne
@@ -34,6 +36,11 @@ public class GamePlayHistory {
         this.time = Utils.getCurrentUtcTime();
     }
 
+    private Long getId()
+    {
+        return this.id;
+    }
+
     public int getCard() {
         return this.card;
     }
@@ -48,6 +55,22 @@ public class GamePlayHistory {
 
     public long getGameId(){
         return this.game.getId();
+    }
+
+    public void setGame(Game game)
+    {
+        this.game = game;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GamePlayHistory )) return false;
+        return this.id != null && this.id.equals(((GamePlayHistory) o).getId());
+    }
+    @Override
+    public int hashCode() {
+        return 31;
     }
 
 
