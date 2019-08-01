@@ -32,6 +32,9 @@ public class Game {
     @OneToMany(mappedBy = "game")
     private List<Player> players = new ArrayList<>();
 
+    @OneToMany(mappedBy = "game")
+    private List<GameAction> actions = new ArrayList<>();
+
     @OneToMany(mappedBy = "game",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
@@ -88,6 +91,11 @@ public class Game {
 
     public void addPlayer(Player player) {
         this.players.add(player);
+    }
+
+    public void addAction(GameAction action) {
+        actions.add(action);
+        action.setGame(this);
     }
 
     public void addPlay(GamePlayHistory gamePlayHistory) {

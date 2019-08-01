@@ -1,9 +1,6 @@
 package QueenOfHeart.controller;
 
-import QueenOfHeart.model.Deck;
-import QueenOfHeart.model.Game;
-import QueenOfHeart.model.GamePlayHistory;
-import QueenOfHeart.model.Player;
+import QueenOfHeart.model.*;
 import QueenOfHeart.repository.ICardRepository;
 import QueenOfHeart.repository.IGameRepository;
 import QueenOfHeart.repository.IPlayerRepository;
@@ -11,6 +8,10 @@ import net.bytebuddy.TypeCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -19,6 +20,9 @@ import java.util.Random;
 @RequestMapping(path = "/card")
 public class CardController {
 
+    private EntityManagerFactory emf_ = Persistence.createEntityManagerFactory("QueenOfHeartDB");
+    private EntityManager em_ = emf_.createEntityManager();
+
     @Autowired
     private IPlayerRepository playerRepository;
     @Autowired
@@ -26,7 +30,8 @@ public class CardController {
 
     @RequestMapping(path = "/draw", method = RequestMethod.POST)
     public @ResponseBody
-    int drawCard(@RequestParam long playerId, @RequestParam long gameId) {
+    GameAction drawCard(@RequestParam long playerId, @RequestParam long gameId) {
+
         Game game = gameRepository.findById(gameId).get();
         Player player = playerRepository.findById(playerId).get();
         List<GamePlayHistory> gameHistory = game.getHistory();
@@ -36,15 +41,22 @@ public class CardController {
             usedCards.add(play.getCard());
         }
         Deck deck = new Deck(usedCards);
-
         int selectedCard = deck.drawCard();
+
+        GameAction action = new GameAction(GameAction.Actions.CardDraw, "" + selectedCard);
+        game.addAction(action);
 
         GamePlayHistory gp = new GamePlayHistory(selectedCard, player, game);
         game.addPlay(gp);
 
-        gameRepository.save(game);
         //TODO: add some rules here
-        return selectedCard;
+        EntityTransaction transaction = em_.getTransaction();
+        transaction.begin();
+
+        em_.persist(action);
+        em_.flush();
+        transaction.commit();
+        return action;
     }
 
     @GetMapping(path = "/all")
