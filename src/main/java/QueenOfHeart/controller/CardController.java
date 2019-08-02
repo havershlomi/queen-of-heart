@@ -1,10 +1,10 @@
 package QueenOfHeart.controller;
 
+import QueenOfHeart.logic.ActionManager;
+import QueenOfHeart.logic.Deck;
 import QueenOfHeart.model.*;
-import QueenOfHeart.repository.ICardRepository;
 import QueenOfHeart.repository.IGameRepository;
 import QueenOfHeart.repository.IPlayerRepository;
-import net.bytebuddy.TypeCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @RestController
 @RequestMapping(path = "/card")
@@ -30,21 +29,21 @@ public class CardController {
 
     @RequestMapping(path = "/draw", method = RequestMethod.POST)
     public @ResponseBody
-    GameAction drawCard(@RequestParam long playerId, @RequestParam long gameId) {
+    List<GameAction> drawCard(@RequestParam long playerId, @RequestParam long gameId) {
 
         Game game = gameRepository.findById(gameId).get();
         Player player = playerRepository.findById(playerId).get();
         List<GamePlayHistory> gameHistory = game.getHistory();
         List<Integer> usedCards = new ArrayList<>();
 
-        for (GamePlayHistory play : gameHistory) {
-            usedCards.add(play.getCard());
-        }
-        Deck deck = new Deck(usedCards);
+        Deck deck = getDeck(gameHistory, usedCards);
+
         int selectedCard = deck.drawCard();
 
-        GameAction action = new GameAction(GameAction.Actions.CardDraw, "" + selectedCard);
-        game.addAction(action);
+        List<GameAction> actions = ActionManager.getNextActions(game, player, selectedCard);
+        for (GameAction action : actions) {
+            game.addAction(action);
+        }
 
         GamePlayHistory gp = new GamePlayHistory(selectedCard, player, game);
         game.addPlay(gp);
@@ -52,18 +51,37 @@ public class CardController {
         //TODO: add some rules here
         EntityTransaction transaction = em_.getTransaction();
         transaction.begin();
-
-        em_.persist(action);
+        //TODO: Check if it works also
+        for (GameAction action : actions) {
+            em_.persist(action);
+        }
         em_.flush();
         transaction.commit();
-        return action;
+        gameRepository.save(game);
+        return actions;
     }
 
-    @GetMapping(path = "/all")
+    private Deck getDeck(List<GamePlayHistory> gameHistory, List<Integer> usedCards) {
+        for (GamePlayHistory play : gameHistory) {
+            usedCards.add(play.getCard());
+        }
+
+        return new Deck(usedCards);
+    }
+
+    @GetMapping(path = "/history")
     public @ResponseBody
     List<GamePlayHistory> getCardsForGame(@RequestParam long gameId) {
         Game game = gameRepository.findById(gameId).get();
         return game.getHistory();
     }
+
+    @GetMapping(path = "/actions")
+    public @ResponseBody
+    List<GameAction> getActions(@RequestParam long gameId) {
+        Game game = gameRepository.findById(gameId).get();
+        return game.getActions();
+    }
+
 
 }

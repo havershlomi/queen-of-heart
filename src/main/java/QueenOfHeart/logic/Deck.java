@@ -1,4 +1,4 @@
-package QueenOfHeart.model;
+package QueenOfHeart.logic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,17 +16,11 @@ public class Deck {
         }
     }
 
+
     public Deck(List<Integer> usedCards) {
         this.availableCards = new ArrayList<>(_deck);
         // TODO: Check if it works on refrences
         this.availableCards.removeAll(usedCards);
-    }
-
-    public static String cardToString(int card) {
-        int type = card / 13;
-        int value = card % 13;
-        String cardType = CardType.getType(type).toString();
-        return cardType + "-" + value;
     }
 
     public int drawCard() {

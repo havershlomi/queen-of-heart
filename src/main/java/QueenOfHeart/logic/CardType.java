@@ -1,4 +1,4 @@
-package QueenOfHeart.model;
+package QueenOfHeart.logic;
 
 public enum CardType {
     Clubs(4), Diamonds(3), Hearts(1), Spades(2);

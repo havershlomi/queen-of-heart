@@ -43,6 +43,9 @@ public class Game {
     public List<GamePlayHistory> getHistory() {
         return this.history;
     }
+    public List<GameAction> getActions() {
+        return this.actions;
+    }
 
     public String getName() {
         return name;

@@ -17,7 +17,14 @@ public class GameAction {
 
     public enum Actions {
         GameStarted,
-        CardDraw
+        CardDraw,
+        TakeOne,
+        TakeTwo,
+        Punish,
+        QueenOfHeartPicked,
+        ChangeDirection,
+        SkipNext,
+        Tage3Togheter
     }
 
     @Id
@@ -37,8 +44,8 @@ public class GameAction {
     public GameAction() {
     }
 
-    public GameAction(Actions command, String data) {
-        this.command = command.name();
+    public GameAction(Actions action, String data) {
+        this.command = action.name();
         this.data = data;
     }
 
