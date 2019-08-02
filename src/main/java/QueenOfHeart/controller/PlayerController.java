@@ -20,6 +20,7 @@ public class PlayerController {
     public @ResponseBody
     Long addPlayerToGame(@RequestParam String name, @RequestParam long gameId) {
         Game game = gameRepository.findById(gameId).get();
+        //TODO: check player index
         Player p = new Player(name, game);
         game.addPlayer(p);
         playerRepository.save(p);
