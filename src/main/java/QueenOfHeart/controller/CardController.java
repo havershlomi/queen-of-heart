@@ -1,6 +1,7 @@
 package QueenOfHeart.controller;
 
 import QueenOfHeart.logic.ActionManager;
+import QueenOfHeart.logic.Actions.GameEnd;
 import QueenOfHeart.logic.Deck;
 import QueenOfHeart.model.*;
 import QueenOfHeart.repository.IGameRepository;
@@ -31,7 +32,16 @@ public class CardController {
     public @ResponseBody
     List<GameAction> drawCard(@RequestParam long playerId, @RequestParam long gameId) {
 
+        //TODO: validate that player belong to this game
         Game game = gameRepository.findById(gameId).get();
+
+        if (game.getStatus() == GameStatus.Finished) {
+            GameAction action = new GameAction(GameAction.Actions.GameEnded, new GameEnd(game.getLosingPlayer()).toJson());
+            List<GameAction> actions = new ArrayList<>();
+            actions.add(action);
+            return actions;
+        }
+
         Player player = playerRepository.findById(playerId).get();
         List<GamePlayHistory> gameHistory = game.getHistory();
         List<Integer> usedCards = new ArrayList<>();

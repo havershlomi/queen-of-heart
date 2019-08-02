@@ -22,6 +22,8 @@ public class Game {
     private Date endTime;
     private GameStatus status;
     private long losingPlayer;
+    //Direaction 1 means clockwise, -1 counter clockwise
+    private int direaction = 1;
 
     public Game() {
         this.setStatus(GameStatus.Ready);
@@ -43,6 +45,7 @@ public class Game {
     public List<GamePlayHistory> getHistory() {
         return this.history;
     }
+
     public List<GameAction> getActions() {
         return this.actions;
     }
@@ -87,6 +90,13 @@ public class Game {
         return this.players;
     }
 
+    public int getDireaction() {
+        return this.direaction;
+    }
+
+    public void changeDireaction() {
+        this.direaction = direaction * -1;
+    }
 
     public long getId() {
         return this.id;

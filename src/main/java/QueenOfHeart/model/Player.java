@@ -52,4 +52,12 @@ public class Player {
     public long getId() {
         return id;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Player){
+            return this.id == ((Player)obj).id;
+        }
+        return false;
+    }
 }

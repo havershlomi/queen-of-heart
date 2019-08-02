@@ -14,7 +14,7 @@ public class Card {
     }
 
     public static Card getCard(int card) {
-        int type = card / 13;
+        int type = (card / 13) + 1;
         int value = card % 13;
         CardType cardType = CardType.getType(type);
         Card c = new Card(value, cardType);

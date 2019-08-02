@@ -24,7 +24,8 @@ public class GameAction {
         QueenOfHeartPicked,
         ChangeDirection,
         SkipNext,
-        Tage3Togheter
+        Take3Together,
+        GameEnded
     }
 
     @Id
