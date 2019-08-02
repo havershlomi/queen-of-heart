@@ -20,8 +20,6 @@ import java.util.List;
 @RequestMapping(path = "/card")
 public class CardController {
 
-    private EntityManagerFactory emf_ = Persistence.createEntityManagerFactory("QueenOfHeartDB");
-    private EntityManager em_ = emf_.createEntityManager();
 
     @Autowired
     private IPlayerRepository playerRepository;
@@ -53,21 +51,32 @@ public class CardController {
         List<GameAction> actions = ActionManager.getNextActions(game, player, selectedCard);
         for (GameAction action : actions) {
             game.addAction(action);
+
         }
 
         GamePlayHistory gp = new GamePlayHistory(selectedCard, player, game);
         game.addPlay(gp);
+        EntityManagerFactory emf_ = Persistence.createEntityManagerFactory("QueenOfHeartDB");
+        EntityManager em_ = emf_.createEntityManager();
 
-        //TODO: add some rules here
         EntityTransaction transaction = em_.getTransaction();
-        transaction.begin();
-        //TODO: Check if it works also
-        for (GameAction action : actions) {
-            em_.persist(action);
+        try {
+            transaction.begin();
+            //TODO: Check if it works also
+            for (GameAction action : actions) {
+                em_.persist(action);
+
+            }
+
+            em_.flush();
+            transaction.commit();
+        } finally {
+            em_.close();
+            emf_.close();
         }
-        em_.flush();
-        transaction.commit();
         gameRepository.save(game);
+
+
         return actions;
     }
 

@@ -11,7 +11,7 @@ import java.util.Set;
 @Table(name = "players")
 public class Player {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "my_entity_seq_gen")
     private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -55,8 +55,8 @@ public class Player {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof Player){
-            return this.id == ((Player)obj).id;
+        if (obj instanceof Player) {
+            return this.id == ((Player) obj).id;
         }
         return false;
     }
