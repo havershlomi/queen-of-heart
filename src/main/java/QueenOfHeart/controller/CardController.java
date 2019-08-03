@@ -4,15 +4,13 @@ import QueenOfHeart.logic.ActionManager;
 import QueenOfHeart.logic.Actions.GameEnd;
 import QueenOfHeart.logic.Deck;
 import QueenOfHeart.model.*;
+import QueenOfHeart.repository.IActionRepository;
 import QueenOfHeart.repository.IGameRepository;
 import QueenOfHeart.repository.IPlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,13 +18,12 @@ import java.util.List;
 @RequestMapping(path = "/card")
 public class CardController {
 
-    private EntityManagerFactory emf_ = Persistence.createEntityManagerFactory("QueenOfHeartDB");
-    private EntityManager em_ = emf_.createEntityManager();
-
     @Autowired
     private IPlayerRepository playerRepository;
     @Autowired
     private IGameRepository gameRepository;
+    @Autowired
+    private IActionRepository actionRepository;
 
     @RequestMapping(path = "/draw", method = RequestMethod.POST)
     public @ResponseBody
@@ -58,16 +55,11 @@ public class CardController {
         GamePlayHistory gp = new GamePlayHistory(selectedCard, player, game);
         game.addPlay(gp);
 
-        //TODO: add some rules here
-        EntityTransaction transaction = em_.getTransaction();
-        transaction.begin();
-        //TODO: Check if it works also
         for (GameAction action : actions) {
-            em_.persist(action);
+            actionRepository.save(action);
         }
-        em_.flush();
-        transaction.commit();
         gameRepository.save(game);
+
         return actions;
     }
 

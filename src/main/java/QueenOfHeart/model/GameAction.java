@@ -30,10 +30,10 @@ public class GameAction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "GAME_ID")
+    @JoinColumn(name = "game_id")
     private Game game;
 
     @NotNull
@@ -58,14 +58,28 @@ public class GameAction {
         this.game = game;
     }
 
-    public long getId() {
-        return id;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return this.id;
     }
 
     public String getData() {
         return this.data;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GameAction)) return false;
+        return this.id != null && this.id.equals(((GameAction) o).getId());
+    }
 
+    @Override
+    public int hashCode() {
+        return 31;
+    }
 }
 
