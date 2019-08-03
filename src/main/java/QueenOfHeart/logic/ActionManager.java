@@ -31,10 +31,12 @@ public class ActionManager {
                 break;
             case SkipNext:
                 nextPlayer = getNextPlayer(game, currentPlayer);
+                actions.add(new GameAction(GameAction.Actions.SkipNext, new Skip(nextPlayer.getId()).toJson()));
                 gameAction = generateTakeOneAction(game, nextPlayer);
                 break;
             case ChangeDirection:
                 game.changeDireaction();
+                actions.add(new GameAction(GameAction.Actions.ChangeDirection, new BaseAction().toJson()));
                 gameAction = generateTakeOneAction(game, currentPlayer);
                 break;
             case Take3Together:
