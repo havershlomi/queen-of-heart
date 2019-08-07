@@ -1,5 +1,6 @@
 package QueenOfHeart.controller;
 
+import QueenOfHeart.WebSocketConfiguration;
 import QueenOfHeart.logic.ActionManager;
 import QueenOfHeart.logic.Actions.GameEnd;
 import QueenOfHeart.logic.Deck;
@@ -8,6 +9,9 @@ import QueenOfHeart.repository.IActionRepository;
 import QueenOfHeart.repository.IGameRepository;
 import QueenOfHeart.repository.IPlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityLinks;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.*;
@@ -15,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@EnableScheduling
 @RequestMapping(path = "/card")
 public class CardController {
 
@@ -24,6 +29,12 @@ public class CardController {
     private IGameRepository gameRepository;
     @Autowired
     private IActionRepository actionRepository;
+
+    @Autowired
+    private SimpMessagingTemplate websocket;
+    @Autowired
+    private EntityLinks entityLinks;
+
 
     @RequestMapping(path = "/draw", method = RequestMethod.POST)
     public @ResponseBody
@@ -59,6 +70,7 @@ public class CardController {
 
         for (GameAction action : actions) {
             actionRepository.save(action);
+            updateCards(action);
         }
         gameRepository.save(game);
 
@@ -71,6 +83,20 @@ public class CardController {
         }
 
         return new Deck(usedCards);
+    }
+
+    private void updateCards(GameAction gameAction) {
+        websocket.convertAndSend(WebSocketConfiguration.MESSAGE_PREFIX + "/draw", gameAction);
+    }
+
+    /**
+     * Take an {@link GameAction} and get the URI using Spring Data REST's {@link EntityLinks}.
+     *
+     * @param employee
+     */
+    private String getPath(GameAction employee) {
+        return this.entityLinks.linkForSingleResource(employee.getClass(),
+                employee.getId()).toUri().getPath();
     }
 
     @GetMapping(path = "/history")

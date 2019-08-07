@@ -5,6 +5,7 @@ import Board from "./board";
 import FormDialog from "./material-dialog";
 
 
+
 export default function App() {
     const [gameId, setGameId] = React.useState(null);
     const [playerId, setPlayerId] = React.useState(null);
@@ -68,6 +69,7 @@ export default function App() {
     }
 
     return (
+
         <div>
             <div>
                 <h2>Lets start a new game</h2>
