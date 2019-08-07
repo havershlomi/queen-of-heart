@@ -1,11 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-// const client = require('./client');
-import Card from "./card";
-
 const axios = require('axios')
-
-const client = require('./client');
+import Board from "./board";
 
 import FormDialog from "./material-dialog";
 
@@ -43,9 +39,15 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <h2>Lets start a new game</h2>
-                <FormDialog buttonName="Create game" header="Create game" confirmButton="Add" attributes={["Name"]}
-                            confirmedAction={this.onGameCreate}/>
+                <div>
+                    <h2>Lets start a new game</h2>
+                    <FormDialog buttonName="Create game" header="Create game" confirmButton="Add" attributes={["Name"]}
+                                confirmedAction={this.onGameCreate}/>
+
+                </div>
+                <div>
+                    <Board/>
+                </div>
             </div>
         )
     }

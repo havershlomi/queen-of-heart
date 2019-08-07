@@ -1,0 +1,17 @@
+.board {
+  height: 100%;
+  max-width: 400px;
+}
+.board .card {
+  display: inline-block;
+  float: left;
+  min-width: 50px;
+  min-height: 75px;
+  background-image: url("../assets/blue_back.png");
+  background-size: cover;
+  background-position: center;
+}
+.board .card:hover {
+  cursor: pointer;
+}
+/*# sourceMappingURL=game.css.map */

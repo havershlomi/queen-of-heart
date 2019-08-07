@@ -1,7 +1,14 @@
 import React from 'react';
+import Card from './card';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
-
-export default function Card(props) {
+export default function Board(props) {
     const [open, setOpen] = React.useState(false);
     const [fields, setFields] = React.useState({})
     const [objState, setObjState] = React.useState({});
@@ -31,9 +38,13 @@ export default function Card(props) {
         setObjState(obj);
     };
 
-    const cardStyle = {backgroundColor: "blue", width: "50px", height: "50px"};
+    const cards = [];
+    for (var i = 0; i < 52; i++) {
+        cards.push(<Card key={i}/>);
+    }
     return (
-        <div className="card">
+        <div className="board">
+            {cards}
         </div>
     );
 }

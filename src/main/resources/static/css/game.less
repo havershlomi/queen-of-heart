@@ -1,0 +1,20 @@
+@cardMinWidth: 50px;
+@cardMinHeight: @cardMinWidth*1.5;
+
+.board {
+  height: 100%;
+  max-width: @cardMinWidth*8;
+
+  .card {
+    display: inline-block;
+    float: left;
+    min-width: @cardMinWidth;
+    min-height: @cardMinHeight;
+    background-image: url("../assets/blue_back.png");
+    background-size: cover;
+    background-position: center;
+  }
+  .card:hover {
+    cursor: pointer;
+  }
+}
