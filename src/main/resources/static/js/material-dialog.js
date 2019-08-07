@@ -4,13 +4,17 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import MySnackbarContentWrapper from "./snack-bar";
+import Snackbar from '@material-ui/core/Snackbar';
+
 
 export default function FormDialog(props) {
     const [open, setOpen] = React.useState(false);
-    const [fields, setFields] = React.useState({})
+    const [message, setMessage] = React.useState("");
     const [objState, setObjState] = React.useState({});
+    const [openErrorMessage, setOpenErrorMessage] = React.useState(false);
+
 
     function handleClickOpen() {
         setOpen(true);
@@ -18,17 +22,29 @@ export default function FormDialog(props) {
 
     function handleClose(isConfirm) {
         if (isConfirm) {
+            setMessage("");
             props.confirmedAction(objState).then(response => {
                 if (response.status) {
                     setOpen(false);
                 } else {
                     console.log("error");
                 }
+            }).catch(response => {
+                setMessage(response);
+                setOpenErrorMessage(true);
             });
 
         } else {
             setOpen(false);
         }
+    }
+
+    function handleCloseErrorMessage(event, reason) {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenErrorMessage(false);
     }
 
     const handleChange = (e) => {
@@ -69,6 +85,22 @@ export default function FormDialog(props) {
                     </Button>
                 </DialogActions>
             </Dialog>
+
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+                open={openErrorMessage}
+                autoHideDuration={3000}
+                onClose={handleCloseErrorMessage}
+            >
+                <MySnackbarContentWrapper
+                    onClose={handleCloseErrorMessage}
+                    variant="error"
+                    message={message}
+                />
+            </Snackbar>
         </div>
     );
 }
