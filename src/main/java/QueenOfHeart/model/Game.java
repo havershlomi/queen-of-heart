@@ -9,7 +9,7 @@ import java.util.*;
 @Entity(name = "Game")
 @Table(name = "Games")
 public class Game {
-
+    //TODO:: add uuid for evety access to this object instead of id should bu unique
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
