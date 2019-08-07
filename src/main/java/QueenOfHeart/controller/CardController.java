@@ -27,7 +27,7 @@ public class CardController {
 
     @RequestMapping(path = "/draw", method = RequestMethod.POST)
     public @ResponseBody
-    List<GameAction> drawCard(@RequestParam long playerId, @RequestParam long gameId) {
+    List<GameAction> drawCard(@RequestParam long playerId, @RequestParam long gameId, @RequestParam int cardId) {
 
         //TODO: validate that player belong to this game
         Game game = gameRepository.findById(gameId).get();
@@ -47,16 +47,15 @@ public class CardController {
 
         int selectedCard = deck.drawCard();
 
-        List<GameAction> actions = ActionManager.getNextActions(game, player, selectedCard);
+        List<GameAction> actions = ActionManager.getNextActions(game, player, selectedCard, cardId);
         for (GameAction action : actions) {
             game.addAction(action);
-
         }
 
         GamePlayHistory gp = new GamePlayHistory(selectedCard, player, game);
         game.addPlay(gp);
-        EntityManagerFactory emf_ = Persistence.createEntityManagerFactory("QueenOfHeartDB");
-        EntityManager em_ = emf_.createEntityManager();
+//        EntityManagerFactory emf_ = Persistence.createEntityManagerFactory("QueenOfHeartDB");
+//        EntityManager em_ = emf_.createEntityManager();
 
         for (GameAction action : actions) {
             actionRepository.save(action);

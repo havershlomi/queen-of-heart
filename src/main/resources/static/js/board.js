@@ -13,10 +13,6 @@ export default function Board(props) {
     const [fields, setFields] = React.useState({})
     const [objState, setObjState] = React.useState({});
 
-    function handleClickOpen() {
-        setOpen(true);
-    }
-
     function handleClose(isConfirm) {
         if (isConfirm) {
             props.confirmedAction(objState).then(response => {
@@ -40,7 +36,7 @@ export default function Board(props) {
 
     const cards = [];
     for (var i = 0; i < 52; i++) {
-        cards.push(<Card key={i}/>);
+        cards.push(<Card key={i.toString()} cardId={i} drawFunc={props.drawCard}/>);
     }
     return (
         <div className="board">
