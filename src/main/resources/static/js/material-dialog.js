@@ -56,6 +56,7 @@ export default function FormDialog(props) {
     const inputs = props.attributes.map(attribute =>
         <div key={attribute.toLowerCase()}>
             <TextField
+                autoFocus
                 margin="dense"
                 id={attribute.toLowerCase()}
                 label={attribute}

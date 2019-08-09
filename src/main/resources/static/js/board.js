@@ -9,42 +9,50 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 const stompClient = require('./websocket-listener');
-
+var dummyCards = [];
+for (var i = 0; i < 52; i++) {
+    dummyCards.push({"i": i, cardName: "Cblue_back"});
+}
 export default function Board(props) {
     const [isConnected, setIsConnected] = React.useState(false);
-    const cards = React.useRef([]);
+    const [cards, setCards] = React.useState([]);
+    const cardsRef = React.useRef(cards);
+
+    //For updating of the ref
+    React.useEffect(() => {
+        cardsRef.current = cards;
+    }, [cards]);
 
     function cardUpdate(message) {
-        debugger;
         var body = JSON.parse(message.body);
         var data = JSON.parse(body.data);
 
         if (body.command === "CardDraw") {
             var cardId = data.cardId;
             var selectedCard = data.selectedCard;
-            //finding the right card for the change
-            var card = cards.filter(i => i.key.toString() === cardId.toString());
             // card[0].className = getCardName(selectedCard.value, selectedCard.type);
             var cardName = getCardName(selectedCard.value, selectedCard.type);
-            card[0] = React.cloneElement(card[0], {cardName: cardName, className: cardName})
-
-            debugger;
+            // cardsRef2.current[cardId].cardName = cardName;
+            let newCards = cardsRef.current.slice();
+            newCards[cardId] = Object.assign({}, newCards[cardId]);
+            newCards[cardId].cardName = cardName;
+            setCards(newCards);
         }
     }
 
     if (!isConnected) {
+        setCards(dummyCards);
         stompClient.register([
             {route: '/topic/draw', callback: cardUpdate},
         ]);
         setIsConnected(true);
     }
 
-    for (var i = 0; i < 52; i++) {
-        cards.current.push(<Card key={i} cardId={i} cardName="" drawFunc={props.drawCard}/>);
-    }
     return (
         <div className="board">
-            {cards}
+            {cards.map(card => {
+                return (<Card key={card.i} cardId={card.i} cardName={card.cardName} drawFunc={props.drawCard}/>)
+            })}
         </div>
     );
 }
