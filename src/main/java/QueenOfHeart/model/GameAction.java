@@ -17,7 +17,8 @@ public class GameAction {
         ChangeDirection,
         SkipNext,
         Take3Together,
-        GameEnded
+        GameEnded,
+        Error
     }
 
     @Id

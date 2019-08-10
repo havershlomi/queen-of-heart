@@ -18,9 +18,11 @@ public class Rules {
         GameAction.Actions selectedAction;
         if (cr.value == 2) {
             selectedAction = GameAction.Actions.TakeTwo;
-        } else if (cr.value == Rules.KING || cr.value == Rules.PRINCE) {
-            selectedAction = GameAction.Actions.Punish;
-        } else if (cr.value == 3) {
+        }
+//        else if (cr.value == Rules.KING || cr.value == Rules.PRINCE) {
+//            selectedAction = GameAction.Actions.Punish;
+//        }
+        else if (cr.value == 3) {
             selectedAction = GameAction.Actions.Take3Together;
         } else if (cr.value == 7) {
             selectedAction = GameAction.Actions.ChangeDirection;

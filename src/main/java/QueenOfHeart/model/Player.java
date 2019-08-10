@@ -11,7 +11,7 @@ import java.util.*;
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "my_entity_seq_gen")
-    private long id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "GAME_ID")
@@ -48,14 +48,14 @@ public class Player {
         return position;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Player) {
-            return this.id == ((Player) obj).id;
+            return this.id.equals(((Player) obj).id);
         }
         return false;
     }

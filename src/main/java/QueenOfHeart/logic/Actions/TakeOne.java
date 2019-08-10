@@ -1,9 +1,14 @@
 package QueenOfHeart.logic.Actions;
 
-public class TakeOne extends BaseAction {
-    public long player;
+import QueenOfHeart.model.Player;
 
-    public TakeOne(long player) {
-        this.player = player;
+import java.util.Map;
+
+public class TakeOne extends BaseAction {
+    public Map<String, Object> player;
+
+    public TakeOne(Player player)
+    {
+        this.player = player.getPlayer();
     }
 }

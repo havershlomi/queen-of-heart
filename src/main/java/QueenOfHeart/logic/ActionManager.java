@@ -5,7 +5,6 @@ import QueenOfHeart.model.Game;
 import QueenOfHeart.model.GameAction;
 import QueenOfHeart.model.GameStatus;
 import QueenOfHeart.model.Player;
-import com.sun.javafx.runtime.eula.Eula;
 import jdk.nashorn.internal.ir.annotations.Reference;
 
 import java.util.ArrayList;
@@ -43,7 +42,7 @@ public class ActionManager {
                 gameAction = generateTake3TogheterAction(game, currentPlayer);
                 break;
             case TakeTwo:
-                action = new TakeTwo(currentPlayer.getId());
+                action = new TakeTwo(currentPlayer);
                 gameAction = new GameAction(GameAction.Actions.TakeTwo, action.toJson());
                 break;
             case QueenOfHeartPicked:
@@ -67,7 +66,7 @@ public class ActionManager {
         Player nextPlayer;
         BaseAction action;
         nextPlayer = getNextPlayer(game, currentPlayer);
-        action = new TakeOne(nextPlayer.getId());
+        action = new TakeOne(nextPlayer);
         return new GameAction(GameAction.Actions.TakeOne, action.toJson());
     }
 

@@ -25,6 +25,9 @@ public class Game {
     //Direaction 1 means clockwise, -1 counter clockwise
     private int direaction = 1;
 
+    @OneToOne
+    private Player gameCreator;
+
     public Game() {
         this.setStatus(GameStatus.Ready);
         this.setLosingPlayer(-1);
@@ -90,6 +93,14 @@ public class Game {
         return this.players;
     }
 
+    public boolean isPlayerBelongs(Long playerId) {
+        for (Player p : this.players) {
+            if (p.getId().equals(playerId))
+                return true;
+        }
+        return false;
+    }
+
     public int getDireaction() {
         return this.direaction;
     }
@@ -103,7 +114,14 @@ public class Game {
     }
 
     public void addPlayer(Player player) {
+        if (this.players.size() == 0) {
+            this.gameCreator = player;
+        }
         this.players.add(player);
+    }
+
+    public Player getGameCreator() {
+        return this.gameCreator;
     }
 
     public void addAction(GameAction action) {

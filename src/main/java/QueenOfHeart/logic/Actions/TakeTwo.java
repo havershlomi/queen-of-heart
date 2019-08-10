@@ -1,9 +1,9 @@
 package QueenOfHeart.logic.Actions;
 
-public class TakeTwo extends BaseAction {
-    public long player;
+import QueenOfHeart.model.Player;
 
-    public TakeTwo(long player) {
-        this.player = player;
+public class TakeTwo extends TakeOne {
+    public TakeTwo(Player player) {
+        super(player);
     }
 }

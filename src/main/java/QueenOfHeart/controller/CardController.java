@@ -2,6 +2,7 @@ package QueenOfHeart.controller;
 
 import QueenOfHeart.WebSocketConfiguration;
 import QueenOfHeart.logic.ActionManager;
+import QueenOfHeart.logic.Actions.ErrorAction;
 import QueenOfHeart.logic.Actions.GameEnd;
 import QueenOfHeart.logic.Deck;
 import QueenOfHeart.model.*;
@@ -40,8 +41,13 @@ public class CardController {
     public @ResponseBody
     List<GameAction> drawCard(@RequestParam long playerId, @RequestParam long gameId, @RequestParam int cardId) {
 
-        //TODO: validate that player belong to this game
         Game game = gameRepository.findById(gameId).get();
+        if (!game.isPlayerBelongs(playerId)) {
+            GameAction action = new GameAction(GameAction.Actions.Error, new ErrorAction("Game doesn't exist").toJson());
+            List<GameAction> actions = new ArrayList<>();
+            actions.add(action);
+            return actions;
+        }
 
         if (game.getStatus() == GameStatus.Finished) {
             GameAction action = new GameAction(GameAction.Actions.GameEnded, new GameEnd(game.getLosingPlayer()).toJson());
@@ -51,6 +57,14 @@ public class CardController {
         }
 
         Player player = playerRepository.findById(playerId).get();
+
+        if (!canDrawCard(game, player)) {
+            GameAction action = new GameAction(GameAction.Actions.Error, new ErrorAction("It isn't your turn!").toJson());
+            List<GameAction> actions = new ArrayList<>();
+            actions.add(action);
+            return actions;
+        }
+
         List<GamePlayHistory> gameHistory = game.getHistory();
         List<Integer> usedCards = new ArrayList<>();
 
@@ -65,8 +79,6 @@ public class CardController {
 
         GamePlayHistory gp = new GamePlayHistory(selectedCard, player, game);
         game.addPlay(gp);
-//        EntityManagerFactory emf_ = Persistence.createEntityManagerFactory("QueenOfHeartDB");
-//        EntityManager em_ = emf_.createEntityManager();
 
         for (GameAction action : actions) {
             actionRepository.save(action);
@@ -75,6 +87,25 @@ public class CardController {
         gameRepository.save(game);
 
         return actions;
+    }
+
+    private boolean canDrawCard(Game game, Player player) {
+        List<GameAction> history = game.getActions();
+        if (history.size() == 0) {
+            if (game.getGameCreator().equals(player))
+                return true;
+        } else {
+            GameAction action = history.get(history.size() - 1);
+            String command = action.getCommand();
+            if (command.equals(GameAction.Actions.TakeOne.name()) ||
+                    command.equals(GameAction.Actions.TakeTwo.name()) ||
+                    command.equals(GameAction.Actions.Take3Together.name())) {
+                if (action.getData().contains(String.valueOf(player.getId()))) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private Deck getDeck(List<GamePlayHistory> gameHistory, List<Integer> usedCards) {
