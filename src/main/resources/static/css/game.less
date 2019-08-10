@@ -1,17 +1,19 @@
 @cardMinWidth: 50px;
 @cardMinHeight: @cardMinWidth*1.5;
-
-
+@cardMargin: 4px;
 
 .board {
   height: 100%;
-  max-width: @cardMinWidth*8;
+  max-width: (@cardMinWidth+@cardMargin)*8;
+  margin: 20px auto;
+  overflow: auto;
 
   .card {
     display: inline-block;
     float: left;
     min-width: @cardMinWidth;
     min-height: @cardMinHeight;
+    margin: @cardMargin;
   }
 
   .card:hover {

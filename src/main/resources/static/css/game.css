@@ -1,12 +1,15 @@
 .board {
   height: 100%;
-  max-width: 400px;
+  max-width: 432px;
+  margin: 20px auto;
+  overflow: auto;
 }
 .board .card {
   display: inline-block;
   float: left;
   min-width: 50px;
   min-height: 75px;
+  margin: 4px;
 }
 .board .card:hover {
   cursor: pointer;
@@ -16,7 +19,6 @@
   background-repeat: no-repeat;
   -webkit-background-size: cover;
   background-size: cover;
-  margin: 4px;
 }
 .board .card.C2C {
   background-image: url('../assets/cards/2C.png');
