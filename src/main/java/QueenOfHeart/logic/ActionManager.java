@@ -14,9 +14,9 @@ import static QueenOfHeart.model.GameAction.Actions.Punish;
 
 public class ActionManager {
 
-    public static List<GameAction> getNextActions(@Reference Game game, Player currentPlayer, int selectedCard, int cardId) {
+    public static List<GameAction> getNextActions(@Reference Game game, Player currentPlayer, int selectedCard, int cardPosition) {
         List<GameAction> actions = new ArrayList<>();
-        BaseAction draw = new CardDraw(selectedCard, currentPlayer, cardId);
+        BaseAction draw = new CardDraw(selectedCard, currentPlayer, cardPosition);
         GameAction cardDraw = new GameAction(GameAction.Actions.CardDraw, draw.toJson());
         actions.add(cardDraw);
 

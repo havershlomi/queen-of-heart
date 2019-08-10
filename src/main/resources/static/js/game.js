@@ -13,8 +13,6 @@ import Cookies from 'universal-cookie';
 import MySnackbarContentWrapper from "./snack-bar";
 
 const stompClient = require('./websocket-listener');
-var dummyCards = [];
-
 
 export default function Game(props) {
     const [isConnected, setIsConnected] = React.useState(false);
@@ -66,15 +64,35 @@ export default function Game(props) {
 
     if (isDeckUpdated === false) {
         //get the deck from server
-        for (var i = 0; i < 52; i++) {
-            dummyCards.push({"i": i, cardName: "Cblue_back", selected: false});
-        }
-        setCards(dummyCards);
         setIsDeckUpdated(true)
+
+        const pResponse = axios({
+            method: "POST",
+            url: '/game/cards',
+            params: {gameId: gameId},
+            headers: {'Content-Type': 'application/json; charset=utf-8"'}
+        }).then(response => {
+            if (response.status === 200) {
+                let dummyCards = [];
+                for (var i = 0; i < 52; i++) {
+                    dummyCards.push({"i": i, cardName: "Cblue_back", selected: false});
+                }
+                for (var i = 0; i < response.data.length; i++) {
+                    let card = response.data[i];
+                    dummyCards[card.cardPosition].cardName = getCardName(card.card.valueName, card.card.type);
+                    dummyCards[card.cardPosition].selected = true;
+                }
+                setCards(dummyCards);
+                return {status: true, data: response.data};
+            }
+            return {status: false, data: response.data};
+        }).catch(() => {
+            setIsDeckUpdated(false)
+        });
+
     }
 
     if (!isConnected) {
-        setCards(dummyCards);
         stompClient.register([
             {route: '/topic/draw', callback: cardUpdate},
         ]);
@@ -102,7 +120,7 @@ export default function Game(props) {
 
         } else if (body.command === "TakeTwo") {
             let player = data.player;
-            updateMessage("top", player.name + "needs to pick 2 cards" +
+            updateMessage("top", player.name + " needs to pick 2 cards" +
                 " now.");
         }
     }
@@ -122,7 +140,7 @@ export default function Game(props) {
         const pResponse = axios({
             method: "POST",
             url: '/card/draw',
-            params: {playerId: playerId, gameId: gameId, cardId: cardId},
+            params: {playerId: playerId, gameId: gameId, cardPosition: cardId},
             headers: {'Content-Type': 'application/json; charset=utf-8"'}
         }).then(response => {
             if (response.status === 200) {
@@ -185,7 +203,6 @@ export default function Game(props) {
         </div>
     )
 };
-
 
 
 function getCardName(value, type) {

@@ -39,7 +39,7 @@ public class CardController {
 
     @RequestMapping(path = "/draw", method = RequestMethod.POST)
     public @ResponseBody
-    List<GameAction> drawCard(@RequestParam long playerId, @RequestParam long gameId, @RequestParam int cardId) {
+    List<GameAction> drawCard(@RequestParam long playerId, @RequestParam long gameId, @RequestParam int cardPosition) {
 
         Game game = gameRepository.findById(gameId).get();
         if (!game.isPlayerBelongs(playerId)) {
@@ -72,12 +72,12 @@ public class CardController {
 
         int selectedCard = deck.drawCard();
 
-        List<GameAction> actions = ActionManager.getNextActions(game, player, selectedCard, cardId);
+        List<GameAction> actions = ActionManager.getNextActions(game, player, selectedCard, cardPosition);
         for (GameAction action : actions) {
             game.addAction(action);
         }
 
-        GamePlayHistory gp = new GamePlayHistory(selectedCard, player, game);
+        GamePlayHistory gp = new GamePlayHistory(selectedCard, player, game, cardPosition);
         game.addPlay(gp);
 
         for (GameAction action : actions) {
@@ -110,7 +110,7 @@ public class CardController {
 
     private Deck getDeck(List<GamePlayHistory> gameHistory, List<Integer> usedCards) {
         for (GamePlayHistory play : gameHistory) {
-            usedCards.add(play.getCard());
+            usedCards.add(play.getCardId());
         }
 
         return new Deck(usedCards);
