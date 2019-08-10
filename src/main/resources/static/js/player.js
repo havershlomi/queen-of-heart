@@ -53,7 +53,9 @@ export default function Player(props) {
     }
 
     return (
+        //TODO: add validation to forms
         <div>
+
             <FormDialog buttonName="Join the game" header="Create player" confirmButton="Join"
                         attributes={["Name"]}
                         confirmedAction={onPlayerCreate}/>

@@ -21,7 +21,7 @@ export default function FormDialog(props) {
     }
 
     function handleClose(isConfirm) {
-        if (isConfirm) {
+        if (isConfirm === true) {
             setMessage("");
             props.confirmedAction(objState).then(response => {
                 if (response.status) {
@@ -31,12 +31,13 @@ export default function FormDialog(props) {
                     console.log("error");
                 }
             }).catch(response => {
-                setMessage(response);
+                setMessage("Can't submit this form");
                 setOpenErrorMessage(true);
             });
 
-        } else {
+        } else if (isConfirm === false) {
             setOpen(false);
+            setObjState({});
         }
     }
 

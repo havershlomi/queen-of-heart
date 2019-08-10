@@ -13,7 +13,6 @@ import Cookies from 'universal-cookie';
 export default function Game(props) {
     let [gameId, setGameId] = React.useState(null);
     let [playerId, setPlayerId] = React.useState(null);
-    // var Cookies2 = Cookies.noConflict();
     const cookies = new Cookies();
 
     const values = queryString.parse(window.location.search);
@@ -54,6 +53,9 @@ export default function Game(props) {
             headers: {'Content-Type': 'application/json; charset=utf-8"'}
         }).then(response => {
             if (response.status === 200) {
+                if (response.command === "Error") {
+
+                }
                 return {status: true, data: response.data};
             }
             return {status: false, data: response.data};
@@ -63,9 +65,9 @@ export default function Game(props) {
     }
 
     return (
-
+        //TODO:: pass deck here
         <div>
-            <Board drawCard={drawCard}/>
+            <Board drawCard={drawCard} deck={null} me={playerId}/>
         </div>
     )
 };

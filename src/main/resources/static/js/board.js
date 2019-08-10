@@ -6,14 +6,16 @@ import MySnackbarContentWrapper from "./snack-bar";
 const stompClient = require('./websocket-listener');
 var dummyCards = [];
 for (var i = 0; i < 52; i++) {
-    dummyCards.push({"i": i, cardName: "Cblue_back"});
+    dummyCards.push({"i": i, cardName: "Cblue_back", selected: false});
 }
 export default function Board(props) {
     const [isConnected, setIsConnected] = React.useState(false);
-    const [isOpen, setIsOpen] = React.useState(false);
+    const [isOpenBottom, setIsOpenBottom] = React.useState(false);
+    const [isOpenTop, setIsOpenTop] = React.useState(false);
     const [cards, setCards] = React.useState([]);
     const cardsRef = React.useRef(cards);
     const [infoMessage, setInfoMessage] = React.useState("");
+    const [topInfoMessage, setTopInfoMessage] = React.useState("");
 
     //For updating of the ref
     React.useEffect(() => {
@@ -25,17 +27,24 @@ export default function Board(props) {
         var data = JSON.parse(body.data);
 
         if (body.command === "CardDraw") {
-            var cardId = data.cardId;
-            var selectedCard = data.selectedCard;
-            var cardName = getCardName(selectedCard.value, selectedCard.type);
+            let cardId = data.cardId;
+            let selectedCard = data.selectedCard;
+            let cardName = getCardName(selectedCard.value, selectedCard.type);
             let newCards = cardsRef.current.slice();
             newCards[cardId] = Object.assign({}, newCards[cardId]);
             newCards[cardId].cardName = cardName;
+            newCards[cardId].selected = true;
             setCards(newCards);
-
             let player = data.player;
+            updateMessage("bottom", player.name + " drawed the: " + selectedCard.valueName + " of " + selectedCard.type);
+        } else if (body.command === "TakeOne") {
+            let player = data.player;
+            updateMessage("top", "It's " + player.name + "'s turn now.");
 
-            updateMessage(player.name + " drawed the: " + selectedCard.valueName + " of " + selectedCard.type);
+        } else if (body.command === "TakeTwo") {
+            let player = data.player;
+            updateMessage("top", player.name + "needs to pick 2 cards" +
+                " now.");
         }
     }
 
@@ -47,23 +56,48 @@ export default function Board(props) {
         setIsConnected(true);
     }
 
-    const handleCloseInfoMessage = (event, reason) => {
+    const handleCloseInfoMessage = (type, event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
-        setIsOpen(false);
+        if (type == "bottom") {
+            setIsOpenBottom(false);
+        } else {
+            setIsOpenTop(false);
+        }
     };
 
-    const updateMessage = (message) => {
-        setInfoMessage(message);
-        setIsOpen(true);
+    const updateMessage = (type, message) => {
+        if (type == "bottom") {
+            setInfoMessage(message);
+            setIsOpenBottom(true);
+        } else {
+            setTopInfoMessage(message);
+            setIsOpenTop(true);
+        }
     };
 
     return (
         <div className="board-container">
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                }}
+                open={isOpenTop}
+                autoHideDuration={3000}
+                onClose={(e, r) => (handleCloseInfoMessage("top", e, r))}
+            >
+                <MySnackbarContentWrapper
+                    onClose={(e, r) => (handleCloseInfoMessage("top", e, r))}
+                    variant="info"
+                    message={topInfoMessage}
+                />
+            </Snackbar>
             <div className="board">
                 {cards.map(card => {
-                    return (<Card key={card.i} cardId={card.i} cardName={card.cardName} drawFunc={props.drawCard}/>)
+                    return (<Card key={card.i} cardId={card.i} cardName={card.cardName} drawFunc={props.drawCard}
+                                  selected={card.selected}/>)
                 })}
 
             </div>
@@ -72,12 +106,12 @@ export default function Board(props) {
                     vertical: 'bottom',
                     horizontal: 'center',
                 }}
-                open={isOpen}
-                autoHideDuration={3000}
-                onClose={handleCloseInfoMessage}
+                open={isOpenBottom}
+                autoHideDuration={2000}
+                onClose={(e, r) => (handleCloseInfoMessage("bottom", e, r))}
             >
                 <MySnackbarContentWrapper
-                    onClose={handleCloseInfoMessage}
+                    onClose={(e, r) => (handleCloseInfoMessage("bottom", e, r))}
                     variant="info"
                     message={infoMessage}
                 />
