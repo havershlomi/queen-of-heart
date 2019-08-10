@@ -25,7 +25,8 @@ export default function FormDialog(props) {
             setMessage("");
             props.confirmedAction(objState).then(response => {
                 if (response.status) {
-                    setOpen(false);
+                    // setOpen(false);
+                    response.callback();
                 } else {
                     console.log("error");
                 }

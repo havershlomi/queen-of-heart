@@ -17,7 +17,7 @@ public class ActionManager {
 
     public static List<GameAction> getNextActions(@Reference Game game, Player currentPlayer, int selectedCard, int cardId) {
         List<GameAction> actions = new ArrayList<>();
-        BaseAction draw = new CardDraw(selectedCard, currentPlayer.getId(), cardId);
+        BaseAction draw = new CardDraw(selectedCard, currentPlayer, cardId);
         GameAction cardDraw = new GameAction(GameAction.Actions.CardDraw, draw.toJson());
         actions.add(cardDraw);
 

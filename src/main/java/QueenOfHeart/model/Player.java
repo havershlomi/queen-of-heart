@@ -4,8 +4,7 @@ import sun.net.www.content.text.PlainTextInputStream;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity(name = "Players")
 @Table(name = "players")
@@ -59,5 +58,12 @@ public class Player {
             return this.id == ((Player) obj).id;
         }
         return false;
+    }
+
+    public Map<String, Object> getPlayer() {
+        Map<String, Object> dictionary = new HashMap<String, Object>();
+        dictionary.put("name", this.name);
+        dictionary.put("id", this.id);
+        return dictionary;
     }
 }

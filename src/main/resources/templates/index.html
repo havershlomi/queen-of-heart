@@ -3,75 +3,17 @@
 <head>
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <!--<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>-->
-    <!--<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>-->
-    <!--<script crossorigin src="https://unpkg.com/@babel/standalone@7.5.5/babel.min.js"></script>-->
-    <!--<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.js"></script>-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/game.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--<link rel="stylesheet" href="/css/game.css"/>-->
+    <link rel="stylesheet" th:href="@{~/css/game.css}">
 
-
-    <script type="text/javascript">
-        $(function () {
-            $("#draw").on("click", function () {
-                $.ajax({
-                    type: "POST",
-                    url: "/card/draw",
-                    data: {
-                        gameId: parseInt($("#draw_game_id").val(), 10),
-                        playerId: parseInt($("#draw_player_id").val(), 10)
-                    },
-                    success: function (data) {
-                        console.dir(data);
-                    }
-                });
-            });
-        });
-    </script>
-</head>
+    </head>
 <body>
 
-<div id="root"></div>
-<div id="create_game">
-    <label for="game_name">Name: </label><input type="text" id="game_name">
-    <button type="submit">Create</button>
-</div>
-<div id="create_player">
-    <label for="game_id">game id: </label><input type="text" id="game_id">
-    <label for="player_name">Player name: </label><input type="text" id="player_name">
-    <button type="submit">Add</button>
-</div>
-
-<div id="draw_card">
-    <label for="draw_game_id">game id: </label><input type="text" id="draw_game_id">
-    <label for="draw_player_id">Player id: </label><input type="text" id="draw_player_id">
-    <button id="draw" type="submit">Draw</button>
-    <div id="draw_result"></div>
-</div>
 <div id="react"></div>
 
-<script src="built/bundle.js"></script>
-<script type="text/babel">
-
-
-    var root = document.getElementById("root");
-    var Message = function (props) {
-        return (<div>
-            {props.msg}
-        </div>)
-    };
-
-    Message.propTypes = {
-        msg: PropTypes.string
-    };
-
-
-    var elm = (<div className="container">
-        <Card/></div>);
-    ReactDOM.render(elm, root);
-</script>
+<script th:src="@{~/built/bundle.js}"></script>
 </body>
 </html>

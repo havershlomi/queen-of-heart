@@ -8,9 +8,18 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/")
 public class IndexController {
 
-    @GetMapping(path = "/index")
+    @GetMapping(path = "/")
     public String index() {
         return "index";
+    }
 
+    @GetMapping(path = "/player")
+    public String player() {
+        return "index";
+    }
+
+    @GetMapping(path = "/game")
+    public String game() {
+        return "index";
     }
 }
