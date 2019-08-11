@@ -2,12 +2,10 @@ package QueenOfHeart.controller;
 
 import QueenOfHeart.model.Game;
 
-import QueenOfHeart.model.GamePlayHistory;
+import QueenOfHeart.model.GameStatus;
 import QueenOfHeart.repository.IGameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(path = "/game")
@@ -17,25 +15,27 @@ public class GameController {
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public @ResponseBody
-    Long addNewGame(@RequestParam String name) {
+    Response<Long> addNewGame(@RequestParam String name) {
         Game n = new Game();
         n.setName(name);
         gameRepository.save(n);
-        return n.getId();
+        return new Response<>("Game Added", n.getId());
     }
 
-    @RequestMapping(path = "/cards", method = RequestMethod.POST)
+    @RequestMapping(path = "/start", method = RequestMethod.POST)
     public @ResponseBody
-    List<GamePlayHistory> getCards(@RequestParam Long gameId) {
+    Response<String> startGame(@RequestParam Long gameId) {
+        Game game = gameRepository.findById(gameId).get();
+        game.setStatus(GameStatus.InProgress);
+        gameRepository.save(game);
+        return new Response<>("Game started", "OK");
+    }
+
+    @RequestMapping(path = "/get", method = RequestMethod.POST)
+    public @ResponseBody
+    Response<Game> getGame(@RequestParam Long gameId) {
         Game game = gameRepository.findById(gameId).get();
 
-        return game.getHistory();
-    }
-
-    @GetMapping(path = "/all")
-    public @ResponseBody
-    Iterable<Game> getAllGames() {
-        // This returns a JSON or XML with the users
-        return gameRepository.findAll();
+        return new Response<>("OK", game);
     }
 }

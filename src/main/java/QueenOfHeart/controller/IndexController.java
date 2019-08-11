@@ -22,4 +22,15 @@ public class IndexController {
     public String game() {
         return "index";
     }
+
+    @GetMapping(path = "/message")
+    public String message() {
+        return "index";
+    }
+
+    @GetMapping(path = "/waitingRoom")
+    public String waitingRoom() {
+        return "index";
+    }
+
 }

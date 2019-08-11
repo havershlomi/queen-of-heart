@@ -39,21 +39,21 @@ public class CardController {
 
     @RequestMapping(path = "/draw", method = RequestMethod.POST)
     public @ResponseBody
-    List<GameAction> drawCard(@RequestParam long playerId, @RequestParam long gameId, @RequestParam int cardPosition) {
+    Response<List<GameAction>> drawCard(@RequestParam long playerId, @RequestParam long gameId, @RequestParam int cardPosition) {
 
         Game game = gameRepository.findById(gameId).get();
         if (!game.isPlayerBelongs(playerId)) {
             GameAction action = new GameAction(GameAction.Actions.Error, new ErrorAction("Game doesn't exist").toJson());
             List<GameAction> actions = new ArrayList<>();
             actions.add(action);
-            return actions;
+            return new Response<>("Error", actions);
         }
 
         if (game.getStatus() == GameStatus.Finished) {
             GameAction action = new GameAction(GameAction.Actions.GameEnded, new GameEnd(game.getLosingPlayer()).toJson());
             List<GameAction> actions = new ArrayList<>();
             actions.add(action);
-            return actions;
+            return new Response<>("OK", actions);
         }
 
         Player player = playerRepository.findById(playerId).get();
@@ -62,14 +62,10 @@ public class CardController {
             GameAction action = new GameAction(GameAction.Actions.Error, new ErrorAction("It isn't your turn!").toJson());
             List<GameAction> actions = new ArrayList<>();
             actions.add(action);
-            return actions;
+            return new Response<>("Error", actions);
         }
 
-        List<GamePlayHistory> gameHistory = game.getHistory();
-        List<Integer> usedCards = new ArrayList<>();
-
-        Deck deck = getDeck(gameHistory, usedCards);
-
+        Deck deck = getDeck(game);
         int selectedCard = deck.drawCard();
 
         List<GameAction> actions = ActionManager.getNextActions(game, player, selectedCard, cardPosition);
@@ -86,7 +82,7 @@ public class CardController {
         }
         gameRepository.save(game);
 
-        return actions;
+        return new Response<>("OK", actions);
     }
 
     private boolean canDrawCard(Game game, Player player) {
@@ -108,7 +104,9 @@ public class CardController {
         return false;
     }
 
-    private Deck getDeck(List<GamePlayHistory> gameHistory, List<Integer> usedCards) {
+    private Deck getDeck(Game game) {
+        List<Integer> usedCards = new ArrayList<>();
+        List<GamePlayHistory> gameHistory = game.getHistory();
         for (GamePlayHistory play : gameHistory) {
             usedCards.add(play.getCardId());
         }
@@ -130,19 +128,19 @@ public class CardController {
                 employee.getId()).toUri().getPath();
     }
 
-    @GetMapping(path = "/history")
-    public @ResponseBody
-    List<GamePlayHistory> getCardsForGame(@RequestParam long gameId) {
-        Game game = gameRepository.findById(gameId).get();
-        return game.getHistory();
-    }
-
-    @GetMapping(path = "/actions")
-    public @ResponseBody
-    List<GameAction> getActions(@RequestParam long gameId) {
-        Game game = gameRepository.findById(gameId).get();
-        return game.getActions();
-    }
+//    @GetMapping(path = "/history")
+//    public @ResponseBody
+//    List<GamePlayHistory> getCardsForGame(@RequestParam long gameId) {
+//        Game game = gameRepository.findById(gameId).get();
+//        return game.getHistory();
+//    }
+//
+//    @GetMapping(path = "/actions")
+//    public @ResponseBody
+//    List<GameAction> getActions(@RequestParam long gameId) {
+//        Game game = gameRepository.findById(gameId).get();
+//        return game.getActions();
+//    }
 
 
 }

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static QueenOfHeart.model.GameAction.Actions.Punish;
+import static QueenOfHeart.model.GameAction.Actions.QueenOfHeartPicked;
 
 public class ActionManager {
 
@@ -20,41 +21,57 @@ public class ActionManager {
         GameAction cardDraw = new GameAction(GameAction.Actions.CardDraw, draw.toJson());
         actions.add(cardDraw);
 
+        GameAction gameAction = null;
+        BaseAction action;
+
         GameAction.Actions nextAction = Rules.getAction(selectedCard);
         Player nextPlayer;
-        BaseAction action;
-        GameAction gameAction = null;
-        switch (nextAction) {
-            case TakeOne:
-                gameAction = generateTakeOneAction(game, currentPlayer);
-                break;
-            case SkipNext:
-                nextPlayer = getNextPlayer(game, currentPlayer);
-                actions.add(new GameAction(GameAction.Actions.SkipNext, new Skip(nextPlayer.getId()).toJson()));
-                gameAction = generateTakeOneAction(game, nextPlayer);
-                break;
-            case ChangeDirection:
-                game.changeDireaction();
-                actions.add(new GameAction(GameAction.Actions.ChangeDirection, new BaseAction().toJson()));
-                gameAction = generateTakeOneAction(game, currentPlayer);
-                break;
-            case Take3Together:
-                gameAction = generateTake3TogheterAction(game, currentPlayer);
-                break;
-            case TakeTwo:
-                action = new TakeTwo(currentPlayer);
-                gameAction = new GameAction(GameAction.Actions.TakeTwo, action.toJson());
-                break;
-            case QueenOfHeartPicked:
-                game.setLosingPlayer(currentPlayer.getId());
-                game.setStatus(GameStatus.Finished);
-                action = new GameEnd(currentPlayer.getId());
-                gameAction = new GameAction(GameAction.Actions.QueenOfHeartPicked, action.toJson());
-                break;
-            case Punish:
-                action = new Punish(currentPlayer.getId());
-                gameAction = new GameAction(Punish, action.toJson());
-                break;
+        boolean shouldCheckNextAction = true;
+
+        //Checks related to history
+        List<GameAction> actionHistory = game.getActions();
+        if (actionHistory.size() != 0) {
+            GameAction lastAction = actionHistory.get(actionHistory.size() - 1);
+            if (lastAction.getCommand().equals(GameAction.Actions.TakeTwo) && nextAction != QueenOfHeartPicked) {
+                action = new TakeOne(currentPlayer);
+                gameAction = new GameAction(GameAction.Actions.TakeOne, action.toJson());
+                shouldCheckNextAction = false;
+            }
+        }
+
+        if (shouldCheckNextAction) {
+            switch (nextAction) {
+                case TakeOne:
+                    gameAction = generateTakeOneAction(game, currentPlayer);
+                    break;
+                case SkipNext:
+                    nextPlayer = getNextPlayer(game, currentPlayer);
+                    actions.add(new GameAction(GameAction.Actions.SkipNext, new Skip(nextPlayer.getId()).toJson()));
+                    gameAction = generateTakeOneAction(game, nextPlayer);
+                    break;
+                case ChangeDirection:
+                    game.changeDireaction();
+                    actions.add(new GameAction(GameAction.Actions.ChangeDirection, new BaseAction().toJson()));
+                    gameAction = generateTakeOneAction(game, currentPlayer);
+                    break;
+                case Take3Together:
+                    gameAction = generateTake3TogheterAction(game, currentPlayer);
+                    break;
+                case TakeTwo:
+                    action = new TakeTwo(currentPlayer);
+                    gameAction = new GameAction(GameAction.Actions.TakeTwo, action.toJson());
+                    break;
+                case QueenOfHeartPicked:
+                    game.setLosingPlayer(currentPlayer.getId());
+                    game.setStatus(GameStatus.Finished);
+                    action = new GameEnd(currentPlayer.getId());
+                    gameAction = new GameAction(GameAction.Actions.QueenOfHeartPicked, action.toJson());
+                    break;
+                case Punish:
+                    action = new Punish(currentPlayer.getId());
+                    gameAction = new GameAction(Punish, action.toJson());
+                    break;
+            }
         }
 
         actions.add(gameAction);
