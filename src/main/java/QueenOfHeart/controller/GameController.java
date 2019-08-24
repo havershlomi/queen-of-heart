@@ -39,9 +39,13 @@ public class GameController {
     @RequestMapping(path = "/get", method = RequestMethod.POST)
     public @ResponseBody
     Response<Game> getGame(@RequestParam Long gameId) {
-        Game game = gameRepository.findById(gameId).get();
+        Optional<Game> oGame = gameRepository.findById(gameId);
+        if(oGame.isPresent()){
+            Game game = oGame.get();
+            return new Response<>("OK", game);
+        }
+        return new Response<>("Error", null);
 
-        return new Response<>("OK", game);
     }
 
     @RequestMapping(path = "/players", method = RequestMethod.POST)

@@ -31,7 +31,7 @@ export default function FormDialog(props) {
                     console.log("error");
                 }
             }).catch(response => {
-                setMessage("Can't submit this form");
+                setMessage("Can't submit this form: " + response);
                 setOpenErrorMessage(true);
             });
 

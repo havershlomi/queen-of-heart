@@ -46,6 +46,12 @@ export default function Player(props) {
                         data: response.data.body,
                         callback: () => (props.history.push("/waitingRoom?game=" + gameId + "&player=" + response.data.body + "&status=ready"))
                     };
+                } else if (response.data.message.indexOf("InvalidGame") !== -1) {
+                    return {
+                        status: true,
+                        data: response.data.body,
+                        callback: () => (props.history.push("/"))
+                    };
                 } else {
                     throw response.data.message;
                 }
