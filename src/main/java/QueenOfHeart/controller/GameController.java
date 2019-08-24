@@ -30,17 +30,22 @@ public class GameController {
     @RequestMapping(path = "/start", method = RequestMethod.POST)
     public @ResponseBody
     Response<String> startGame(@RequestParam Long gameId) {
-        Game game = gameRepository.findById(gameId).get();
-        game.setStatus(GameStatus.InProgress);
-        gameRepository.save(game);
-        return new Response<>("Game started", "OK");
+        Optional<Game> oGame = gameRepository.findById(gameId);
+        if (oGame.isPresent()) {
+            Game game = oGame.get();
+
+            game.setStatus(GameStatus.InProgress);
+            gameRepository.save(game);
+            return Response.Ok("Game started");
+        }
+        return Response.Error(null);
     }
 
     @RequestMapping(path = "/get", method = RequestMethod.POST)
     public @ResponseBody
     Response<Game> getGame(@RequestParam Long gameId) {
         Optional<Game> oGame = gameRepository.findById(gameId);
-        if(oGame.isPresent()){
+        if (oGame.isPresent()) {
             Game game = oGame.get();
             return new Response<>("OK", game);
         }

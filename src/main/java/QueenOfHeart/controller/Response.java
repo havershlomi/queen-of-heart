@@ -17,4 +17,12 @@ public class Response<T> {
     public T getBody() {
         return body;
     }
+
+    public static <K> Response<K> Ok(K body) {
+        return new Response<K>("OK", body);
+    }
+
+    public static <K> Response<K> Error(K body) {
+        return new Response<K>("Error", body);
+    }
 }
