@@ -15,14 +15,19 @@ import MySnackbarContentWrapper from "./snack-bar";
 const stompClient = require('./websocket-listener');
 
 export default function Game(props) {
-    const [isConnected, setIsConnected] = React.useState(false);
-    const [isDeckUpdated, setIsDeckUpdated] = React.useState(false);
     let [gameId, setGameId] = React.useState(null);
     let [playerId, setPlayerId] = React.useState(null);
-    const [isOpenBottom, setIsOpenBottom] = React.useState(false);
-    const [isOpenTop, setIsOpenTop] = React.useState(false);
+    const [currentPlayerId, setCurrentPlayerId] = React.useState(null);
+    const [isConnected, setIsConnected] = React.useState(false);
+    const [isDeckUpdated, setIsDeckUpdated] = React.useState(false);
+    let [isStarted, setIsStarted] = React.useState(true);
+
     const [cards, setCards] = React.useState([]);
     const cardsRef = React.useRef(cards);
+
+    //Messgaes
+    const [isOpenBottom, setIsOpenBottom] = React.useState(false);
+    const [isOpenTop, setIsOpenTop] = React.useState(false);
     const [infoMessage, setInfoMessage] = React.useState("");
     const [topInfoMessage, setTopInfoMessage] = React.useState("");
 
@@ -34,19 +39,25 @@ export default function Game(props) {
 
     const values = queryString.parse(window.location.search);
 
+    function isIntValid(id) {
+        if (isNaN(id) || id <= 0)
+            return false;
+        return true;
+    }
+
     if (gameId === null) {
         gameId = parseInt(values.game, 10);
         if (!isIntValid(gameId)) {
             props.history.push("/?msg=invalid_game");
         } else {
             setGameId(gameId);
+            if (!isConnected) {
+                stompClient.register([
+                    {route: '/topic/' + gameId + '/draw', callback: cardUpdate},
+                ]);
+                setIsConnected(true);
+            }
         }
-    }
-
-    function isIntValid(id) {
-        if (isNaN(id) || id <= 0)
-            return false;
-        return true;
     }
 
     if (playerId === null && values.msg === undefined) {
@@ -62,41 +73,50 @@ export default function Game(props) {
         }
     }
 
+    if (values.status && values.status.toLowerCase() === "ready" && isStarted === true) {
+        setIsStarted(false);
+        isStarted = false;
+    }
+//TODO: allow the owner to press start button
     if (isDeckUpdated === false) {
         //get the deck from server
         setIsDeckUpdated(true)
 
         const pResponse = axios({
             method: "POST",
-            url: '/game/cards',
+            url: '/game/get',
             params: {gameId: gameId},
             headers: {'Content-Type': 'application/json; charset=utf-8"'}
         }).then(response => {
             if (response.status === 200) {
-                let dummyCards = [];
-                for (var i = 0; i < 52; i++) {
-                    dummyCards.push({"i": i, cardName: "Cblue_back", selected: false});
+                if (response.data.message == "OK") {
+                    if (response.data.body.status === "Ready") {
+                        //TODO:: Set wait screen
+                        props.history.push("/waitingRoom?game=" + gameId + "&player=" + response.data.body + "&status=ready");
+                    } else if (response.data.body.status === "Finished") {
+                        props.history.push("/message?msg=game_over");
+                    } else if (response.data.body.status === "InProgress") {
+                        let dummyCards = [];
+                        for (let i = 0; i < 52; i++) {
+                            dummyCards.push({"i": i, cardName: "Cblue_back", selected: false});
+                        }
+                        let history = response.data.body.history;
+                        for (let i = 0; i < history.length; i++) {
+                            let card = history[i];
+                            dummyCards[card.cardPosition].cardName = getCardName(card.card.valueName, card.card.type);
+                            dummyCards[card.cardPosition].selected = true;
+                        }
+                        setCards(dummyCards);
+                    }
+                    return {status: true, data: response.data};
                 }
-                for (var i = 0; i < response.data.length; i++) {
-                    let card = response.data[i];
-                    dummyCards[card.cardPosition].cardName = getCardName(card.card.valueName, card.card.type);
-                    dummyCards[card.cardPosition].selected = true;
-                }
-                setCards(dummyCards);
-                return {status: true, data: response.data};
             }
             return {status: false, data: response.data};
         }).catch(() => {
-            setIsDeckUpdated(false)
+            props.history.push("/");
+
         });
 
-    }
-
-    if (!isConnected) {
-        stompClient.register([
-            {route: '/topic/draw', callback: cardUpdate},
-        ]);
-        setIsConnected(true);
     }
 
     function cardUpdate(response) {
@@ -117,11 +137,18 @@ export default function Game(props) {
         } else if (body.command === "TakeOne") {
             let player = data.player;
             updateMessage("top", "It's " + player.name + "'s turn now.");
-
+            setCurrentPlayerId(player.id);
         } else if (body.command === "TakeTwo") {
             let player = data.player;
             updateMessage("top", player.name + " needs to pick 2 cards" +
                 " now.");
+            setCurrentPlayerId(player.id);
+        } else if (body.command === "QueenOfHeartPicked") {
+            let player = data.player;
+            updateMessage("top", " Game ended " + player.name + "lost!!");
+            //redirect to diffrent page
+            props.history.push("/message?msg=game_over");
+
         }
     }
 
@@ -137,6 +164,9 @@ export default function Game(props) {
 
 
     function drawCard(cardId) {
+        if (currentPlayerId !== null && currentPlayerId !== playerId)
+            return;
+
         const pResponse = axios({
             method: "POST",
             url: '/card/draw',
@@ -165,41 +195,48 @@ export default function Game(props) {
             setIsOpenTop(false);
         }
     };
+    const hideDiv = {display: "hide"};
+    const showDiv = {display: "block"};
 
     return (
         //TODO:: pass deck here
         <div>
-            <Snackbar
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center',
-                }}
-                open={isOpenTop}
-                autoHideDuration={3000}
-                onClose={(e, r) => (handleCloseInfoMessage("top", e, r))}
-            >
-                <MySnackbarContentWrapper
+            <div className={"game-ready" + (isStarted ? hideDiv : showDiv)}>
+                <h1>Game not started</h1>
+            </div>
+            <div className={"game-started" + (!isStarted ? hideDiv : showDiv)}>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                    open={isOpenTop}
+                    autoHideDuration={3000}
                     onClose={(e, r) => (handleCloseInfoMessage("top", e, r))}
-                    variant="info"
-                    message={topInfoMessage}
-                />
-            </Snackbar>
-            <Board drawCard={drawCard} deck={cards} me={playerId}/>
-            <Snackbar
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                }}
-                open={isOpenBottom}
-                autoHideDuration={2000}
-                onClose={(e, r) => (handleCloseInfoMessage("bottom", e, r))}
-            >
-                <MySnackbarContentWrapper
+                >
+                    <MySnackbarContentWrapper
+                        onClose={(e, r) => (handleCloseInfoMessage("top", e, r))}
+                        variant="info"
+                        message={topInfoMessage}
+                    />
+                </Snackbar>
+                <Board drawCard={drawCard} deck={cards} me={playerId}/>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                    open={isOpenBottom}
+                    autoHideDuration={2000}
                     onClose={(e, r) => (handleCloseInfoMessage("bottom", e, r))}
-                    variant="info"
-                    message={infoMessage}
-                />
-            </Snackbar>
+                >
+                    <MySnackbarContentWrapper
+                        onClose={(e, r) => (handleCloseInfoMessage("bottom", e, r))}
+                        variant="info"
+                        message={infoMessage}
+                    />
+                </Snackbar>
+            </div>
         </div>
     )
 };

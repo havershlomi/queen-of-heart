@@ -5,6 +5,7 @@ import sun.net.www.content.text.PlainTextInputStream;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity(name = "Game")
 @Table(name = "Games")
@@ -137,6 +138,13 @@ public class Game {
     public void removePlay(GamePlayHistory gamePlayHistory) {
         history.remove(gamePlayHistory);
         gamePlayHistory.setGame(null);
+    }
+
+    public List<String> getPlayerNames() {
+        List<String> players =
+                this.getPlayers().stream().sorted(Comparator.comparing(Player::getPosition)).map(player -> player.getName()).collect(Collectors.toList());
+
+        return players;
     }
 }
 

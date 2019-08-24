@@ -78,7 +78,7 @@ public class CardController {
 
         for (GameAction action : actions) {
             actionRepository.save(action);
-            updateCards(action);
+            updateCards(game.getId(), action);
         }
         gameRepository.save(game);
 
@@ -114,18 +114,8 @@ public class CardController {
         return new Deck(usedCards);
     }
 
-    private void updateCards(GameAction gameAction) {
-        websocket.convertAndSend(WebSocketConfiguration.MESSAGE_PREFIX + "/draw", gameAction);
-    }
-
-    /**
-     * Take an {@link GameAction} and get the URI using Spring Data REST's {@link EntityLinks}.
-     *
-     * @param employee
-     */
-    private String getPath(GameAction employee) {
-        return this.entityLinks.linkForSingleResource(employee.getClass(),
-                employee.getId()).toUri().getPath();
+    private void updateCards(Long gameId, GameAction gameAction) {
+        websocket.convertAndSend(WebSocketConfiguration.MESSAGE_PREFIX + "/" + String.valueOf(gameId) + "/draw", gameAction);
     }
 
 //    @GetMapping(path = "/history")

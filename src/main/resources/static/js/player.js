@@ -40,11 +40,15 @@ export default function Player(props) {
         }).then(response => {
             if (response.status === 200) {
                 // setPlayerId(response.data);
-                return {
-                    status: true,
-                    data: response.data,
-                    callback: () => (props.history.push("/game?game=" + gameId + "&player=" + response.data))
-                };
+                if (response.data.message === "OK") {
+                    return {
+                        status: true,
+                        data: response.data.body,
+                        callback: () => (props.history.push("/waitingRoom?game=" + gameId + "&player=" + response.data.body + "&status=ready"))
+                    };
+                } else {
+                    throw response.data.message;
+                }
             }
             return {status: false, data: response.data};
         });
@@ -55,7 +59,7 @@ export default function Player(props) {
     return (
         //TODO: add validation to forms
         <div>
-
+            <h2>Game: Name here</h2>
             <FormDialog buttonName="Join the game" header="Create player" confirmButton="Join"
                         attributes={["Name"]}
                         confirmedAction={onPlayerCreate}/>

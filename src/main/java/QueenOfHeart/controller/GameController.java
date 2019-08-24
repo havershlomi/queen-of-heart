@@ -7,6 +7,11 @@ import QueenOfHeart.repository.IGameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping(path = "/game")
 public class GameController {
@@ -37,5 +42,19 @@ public class GameController {
         Game game = gameRepository.findById(gameId).get();
 
         return new Response<>("OK", game);
+    }
+
+    @RequestMapping(path = "/players", method = RequestMethod.POST)
+    public @ResponseBody
+    Response<List<String>> getPlayers(@RequestParam Long gameId) {
+        Optional<Game> oGame = gameRepository.findById(gameId);
+
+        if (oGame.isPresent()) {
+            Game game = oGame.get();
+
+            List<String> players = game.getPlayerNames();
+            return new Response<>("OK", players);
+        }
+        return new Response<>("Error", null);
     }
 }
