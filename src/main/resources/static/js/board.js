@@ -1,14 +1,8 @@
 import React from 'react';
 import Card from './card';
-import Snackbar from "@material-ui/core/Snackbar/Snackbar";
-import MySnackbarContentWrapper from "./snack-bar";
 
 
 export default function Board(props) {
-    const [cards, setCards] = React.useState([]);
-    const cardsRef = React.useRef(cards);
-
-
 
     return (
         <div className="board-container">
@@ -20,7 +14,6 @@ export default function Board(props) {
                 })}
 
             </div>
-
         </div>
     );
 }

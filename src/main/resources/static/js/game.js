@@ -188,7 +188,9 @@ export default function Game(props) {
 
     function drawCard(cardId) {
         if (currentPlayerId !== null && currentPlayerId !== playerId)
-            return;
+            return new Promise((resolve, reject) => {
+                resolve({status: false});
+            });
 
         const pResponse = axios({
             method: "POST",
@@ -197,8 +199,8 @@ export default function Game(props) {
             headers: {'Content-Type': 'application/json; charset=utf-8"'}
         }).then(response => {
             if (response.status === 200) {
-                if (response.command === "Error") {
-
+                if (response.data.message === "Error") {
+                    return {status: false, data: response.data};
                 }
                 return {status: true, data: response.data};
             }
