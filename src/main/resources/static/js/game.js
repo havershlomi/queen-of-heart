@@ -57,6 +57,30 @@ export default function Game(props) {
                 ]);
                 setIsConnected(true);
             }
+            axios({
+                method: "POST",
+                url: '/game/get',
+                params: {gameId: gameId},
+                headers: {'Content-Type': 'application/json; charset=utf-8"'}
+            }).then(response => {
+                    if (response.status === 200) {
+                        if (response.data.message == "OK") {
+                            if (response.data.body.status.toLowerCase().indexOf("inprogress") !== -1) {
+                                setIsStarted(true);
+                                isStarted = true;
+                            } else {
+                                props.history.push("/");
+                            }
+                        } else {
+                            props.history.push("/");
+                        }
+                        return {status: true, data: response.data};
+                    }
+                    return {status: false, data: response.data};
+                }
+            ).catch(() => {
+                props.history.push("/");
+            });
         }
     }
 
@@ -77,7 +101,7 @@ export default function Game(props) {
         setIsStarted(false);
         isStarted = false;
     }
-//TODO: allow the owner to press start button
+
     if (isDeckUpdated === false) {
         //get the deck from server
         setIsDeckUpdated(true)
@@ -90,12 +114,11 @@ export default function Game(props) {
         }).then(response => {
             if (response.status === 200) {
                 if (response.data.message == "OK") {
-                    if (response.data.body.status === "Ready") {
-                        //TODO:: Set wait screen
+                    if (response.data.body.status.toLowerCase().indexOf("ready") !== -1) {
                         props.history.push("/waitingRoom?game=" + gameId + "&player=" + response.data.body + "&status=ready");
-                    } else if (response.data.body.status === "Finished") {
+                    } else if (response.data.body.status.toLowerCase().indexOf("finished") !== -1) {
                         props.history.push("/message?msg=game_over");
-                    } else if (response.data.body.status === "InProgress") {
+                    } else if (response.data.body.status.toLowerCase().indexOf("inprogress") !== -1) {
                         let dummyCards = [];
                         for (let i = 0; i < 52; i++) {
                             dummyCards.push({"i": i, cardName: "Cblue_back", selected: false});
@@ -195,16 +218,16 @@ export default function Game(props) {
             setIsOpenTop(false);
         }
     };
-    const hideDiv = {display: "hide"};
+    const hideDiv = {display: "none"};
     const showDiv = {display: "block"};
 
     return (
         //TODO:: pass deck here
         <div>
-            <div className={"game-ready" + (isStarted ? hideDiv : showDiv)}>
+            <div className={"game-ready"} style={(isStarted ? hideDiv : showDiv)}>
                 <h1>Game not started</h1>
             </div>
-            <div className={"game-started" + (!isStarted ? hideDiv : showDiv)}>
+            <div className={"game-started"} style={(!isStarted ? hideDiv : showDiv)}>
                 <Snackbar
                     anchorOrigin={{
                         vertical: 'top',

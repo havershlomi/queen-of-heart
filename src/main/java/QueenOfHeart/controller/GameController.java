@@ -1,22 +1,25 @@
 package QueenOfHeart.controller;
 
+import QueenOfHeart.WebSocketConfiguration;
 import QueenOfHeart.model.Game;
 
 import QueenOfHeart.model.GameStatus;
 import QueenOfHeart.repository.IGameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/game")
 public class GameController {
+
     @Autowired
     private IGameRepository gameRepository;
+    @Autowired
+    private SimpMessagingTemplate websocket;
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public @ResponseBody
@@ -36,6 +39,7 @@ public class GameController {
 
             game.setStatus(GameStatus.InProgress);
             gameRepository.save(game);
+            gameStatusChange(game);
             return Response.Ok("Game started");
         }
         return Response.Error(null);
@@ -65,5 +69,11 @@ public class GameController {
             return new Response<>("OK", players);
         }
         return new Response<>("Error", null);
+    }
+
+
+    private void gameStatusChange(Game game) {
+        Map<String, Object> msg = game.getGame();
+        websocket.convertAndSend(WebSocketConfiguration.MESSAGE_PREFIX + "/" + String.valueOf(game.getId()) + "/status", msg);
     }
 }

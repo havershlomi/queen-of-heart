@@ -146,5 +146,14 @@ public class Game {
 
         return players;
     }
+
+    public Map<String, Object> getGame() {
+        Map<String, Object> dictionary = new HashMap<String, Object>();
+        dictionary.put("name", this.name);
+        dictionary.put("id", this.id);
+        dictionary.put("ceatorId", this.gameCreator.getId());
+        dictionary.put("status", this.status.toString());
+        return dictionary;
+    }
 }
 
