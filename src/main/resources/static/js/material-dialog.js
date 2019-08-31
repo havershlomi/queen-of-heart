@@ -22,6 +22,17 @@ export default function FormDialog(props) {
 
     function handleClose(isConfirm) {
         if (isConfirm === true) {
+
+            let values = Object.values(objState);
+            values = (values.length === 0 ? [""] : values);
+            for (let i = 0; i < values.length; i++) {
+                if (values[i].length == 0) {
+                    setMessage("All fields should be filled");
+                    setOpenErrorMessage(true);
+                    return;
+                }
+            }
+
             setMessage("");
             props.confirmedAction(objState).then(response => {
                 if (response.status) {
@@ -59,6 +70,7 @@ export default function FormDialog(props) {
         <div key={attribute.toLowerCase()}>
             <TextField
                 autoFocus
+                required
                 margin="dense"
                 id={attribute.toLowerCase()}
                 label={attribute}

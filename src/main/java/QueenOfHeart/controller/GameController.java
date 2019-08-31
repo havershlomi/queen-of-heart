@@ -51,9 +51,9 @@ public class GameController {
         Optional<Game> oGame = gameRepository.findById(gameId);
         if (oGame.isPresent()) {
             Game game = oGame.get();
-            return new Response<>("OK", game);
+            return Response.Ok(game);
         }
-        return new Response<>("Error", null);
+        return Response.Error(null);
 
     }
 
