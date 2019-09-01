@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -50,7 +47,7 @@ public class PlayerController {
                 ResponseEntity.status(HttpStatus.OK).headers(headers).build();
                 response.addCookie(new Cookie("q_player", String.valueOf(p.getId())));
 
-                List<String> players = game.getPlayerNames();
+                List<Map<String, Object>> players = game.getPlayersObj();
                 updatePlayers(gameId, players);
                 return new Response<>("OK", p.getId());
             } else {
@@ -60,7 +57,7 @@ public class PlayerController {
         return new Response<>("InvalidGame", -1L);
     }
 
-    private void updatePlayers(Long gameId, List<String> players) {
+    private void updatePlayers(Long gameId, List<Map<String, Object>> players) {
         websocket.convertAndSend(WebSocketConfiguration.MESSAGE_PREFIX + "/" + String.valueOf(gameId) + "/player", players);
     }
 }

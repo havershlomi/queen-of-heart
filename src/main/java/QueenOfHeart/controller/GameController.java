@@ -61,13 +61,13 @@ public class GameController {
 
     @RequestMapping(path = "/players", method = RequestMethod.POST)
     public @ResponseBody
-    Response<List<String>> getPlayers(@RequestParam Long gameId) {
+    Response<List<Map<String, Object>>> getPlayers(@RequestParam Long gameId) {
         Optional<Game> oGame = gameRepository.findById(gameId);
 
         if (oGame.isPresent()) {
             Game game = oGame.get();
 
-            List<String> players = game.getPlayerNames();
+            List<Map<String, Object>> players = game.getPlayersObj();
             return new Response<>("OK", players);
         }
         return new Response<>("Error", null);

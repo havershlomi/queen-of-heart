@@ -173,7 +173,6 @@ export default function Game(props) {
             updateMessage("top", " Game ended " + player.name + " lost!!");
             //redirect to diffrent page
             // props.history.push("/message?msg=game_over");
-
         }
     }
 

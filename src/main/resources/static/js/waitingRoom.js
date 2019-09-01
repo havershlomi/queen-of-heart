@@ -175,7 +175,7 @@ export default function WaitingRoom(props) {
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText
-                                    primary={player}
+                                    primary={player.name + (player.id === playerId ? " - You":"")}
                                 />
                             </ListItem>)
                         })}

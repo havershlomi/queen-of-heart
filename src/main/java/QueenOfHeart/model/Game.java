@@ -140,9 +140,9 @@ public class Game {
         gamePlayHistory.setGame(null);
     }
 
-    public List<String> getPlayerNames() {
-        List<String> players =
-                this.getPlayers().stream().sorted(Comparator.comparing(Player::getPosition)).map(player -> player.getName()).collect(Collectors.toList());
+    public List<Map<String, Object>> getPlayersObj() {
+        List<Map<String, Object>> players =
+                this.getPlayers().stream().sorted(Comparator.comparing(Player::getPosition)).map(player -> player.getPlayer()).collect(Collectors.toList());
 
         return players;
     }

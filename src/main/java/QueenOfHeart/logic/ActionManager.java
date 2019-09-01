@@ -29,6 +29,7 @@ public class ActionManager {
         boolean shouldCheckNextAction = true;
 
         //Checks related to history
+        // In order to contol special cards we need to check the history
         //TODO: handle 3 and jack pick
         List<GameAction> actionHistory = game.getActions();
         if (actionHistory.size() != 0) {
