@@ -1,197 +1,215 @@
-.board {
+body * {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+body .share-link {
+  min-width: 200px;
+  height: 2em;
+  border-color: black;
+}
+.board-container .header {
+  width: 100%;
+  height: 100px;
+  background-color: cadetblue;
+}
+.board-container .header span {
+  font-size: 33px;
+  display: inline-block;
+  margin: 60px 0 0 0;
+}
+.board-container .board {
   height: 100%;
   max-width: 432px;
-  margin: 20px auto;
+  margin: 5px auto;
   overflow: auto;
 }
-.board .card {
+.board-container .board .card {
   display: inline-block;
   float: left;
   min-width: 50px;
   min-height: 75px;
   margin: 4px;
 }
-.board .card:hover {
+.board-container .board .card:hover {
   cursor: pointer;
 }
-.board .card {
+.board-container .board .card {
   background-image: url('../assets/sprite_cards.png');
   background-repeat: no-repeat;
   -webkit-background-size: cover;
   background-size: cover;
 }
-.board .card.C2C {
+.board-container .board .card.C2C {
   background-image: url('../assets/cards/2C.png');
 }
-.board .card.C2D {
+.board-container .board .card.C2D {
   background-image: url('../assets/cards/2D.png');
 }
-.board .card.C2H {
+.board-container .board .card.C2H {
   background-image: url('../assets/cards/2H.png');
 }
-.board .card.C2S {
+.board-container .board .card.C2S {
   background-image: url('../assets/cards/2S.png');
 }
-.board .card.C3C {
+.board-container .board .card.C3C {
   background-image: url('../assets/cards/3C.png');
 }
-.board .card.C3D {
+.board-container .board .card.C3D {
   background-image: url('../assets/cards/3D.png');
 }
-.board .card.C3H {
+.board-container .board .card.C3H {
   background-image: url('../assets/cards/3H.png');
 }
-.board .card.C3S {
+.board-container .board .card.C3S {
   background-image: url('../assets/cards/3S.png');
 }
-.board .card.C4C {
+.board-container .board .card.C4C {
   background-image: url('../assets/cards/4C.png');
 }
-.board .card.C4D {
+.board-container .board .card.C4D {
   background-image: url('../assets/cards/4D.png');
 }
-.board .card.C4H {
+.board-container .board .card.C4H {
   background-image: url('../assets/cards/4H.png');
 }
-.board .card.C4S {
+.board-container .board .card.C4S {
   background-image: url('../assets/cards/4S.png');
 }
-.board .card.C5C {
+.board-container .board .card.C5C {
   background-image: url('../assets/cards/5C.png');
 }
-.board .card.C5D {
+.board-container .board .card.C5D {
   background-image: url('../assets/cards/5D.png');
 }
-.board .card.C5H {
+.board-container .board .card.C5H {
   background-image: url('../assets/cards/5H.png');
 }
-.board .card.C5S {
+.board-container .board .card.C5S {
   background-image: url('../assets/cards/5S.png');
 }
-.board .card.C6C {
+.board-container .board .card.C6C {
   background-image: url('../assets/cards/6C.png');
 }
-.board .card.C6D {
+.board-container .board .card.C6D {
   background-image: url('../assets/cards/6D.png');
 }
-.board .card.C6H {
+.board-container .board .card.C6H {
   background-image: url('../assets/cards/6H.png');
 }
-.board .card.C6S {
+.board-container .board .card.C6S {
   background-image: url('../assets/cards/6S.png');
 }
-.board .card.C7C {
+.board-container .board .card.C7C {
   background-image: url('../assets/cards/7C.png');
 }
-.board .card.C7D {
+.board-container .board .card.C7D {
   background-image: url('../assets/cards/7D.png');
 }
-.board .card.C7H {
+.board-container .board .card.C7H {
   background-image: url('../assets/cards/7H.png');
 }
-.board .card.C7S {
+.board-container .board .card.C7S {
   background-image: url('../assets/cards/7S.png');
 }
-.board .card.C8C {
+.board-container .board .card.C8C {
   background-image: url('../assets/cards/8C.png');
 }
-.board .card.C8D {
+.board-container .board .card.C8D {
   background-image: url('../assets/cards/8D.png');
 }
-.board .card.C8H {
+.board-container .board .card.C8H {
   background-image: url('../assets/cards/8H.png');
 }
-.board .card.C8S {
+.board-container .board .card.C8S {
   background-image: url('../assets/cards/8S.png');
 }
-.board .card.C9C {
+.board-container .board .card.C9C {
   background-image: url('../assets/cards/9C.png');
 }
-.board .card.C9D {
+.board-container .board .card.C9D {
   background-image: url('../assets/cards/9D.png');
 }
-.board .card.C9H {
+.board-container .board .card.C9H {
   background-image: url('../assets/cards/9H.png');
 }
-.board .card.C9S {
+.board-container .board .card.C9S {
   background-image: url('../assets/cards/9S.png');
 }
-.board .card.C10C {
+.board-container .board .card.C10C {
   background-image: url('../assets/cards/10C.png');
 }
-.board .card.C10D {
+.board-container .board .card.C10D {
   background-image: url('../assets/cards/10D.png');
 }
-.board .card.C10H {
+.board-container .board .card.C10H {
   background-image: url('../assets/cards/10H.png');
 }
-.board .card.C10S {
+.board-container .board .card.C10S {
   background-image: url('../assets/cards/10S.png');
 }
-.board .card.CAC {
+.board-container .board .card.CAC {
   background-image: url('../assets/cards/AC.png');
 }
-.board .card.CAD {
+.board-container .board .card.CAD {
   background-image: url('../assets/cards/AD.png');
 }
-.board .card.CAH {
+.board-container .board .card.CAH {
   background-image: url('../assets/cards/AH.png');
 }
-.board .card.CAS {
+.board-container .board .card.CAS {
   background-image: url('../assets/cards/AS.png');
 }
-.board .card.Cblue_back {
+.board-container .board .card.Cblue_back {
   background-image: url('../assets/cards/blue_back.png');
 }
-.board .card.Cgray_back {
+.board-container .board .card.Cgray_back {
   background-image: url('../assets/cards/gray_back.png');
 }
-.board .card.Cgreen_back {
+.board-container .board .card.Cgreen_back {
   background-image: url('../assets/cards/green_back.png');
 }
-.board .card.CJC {
+.board-container .board .card.CJC {
   background-image: url('../assets/cards/JC.png');
 }
-.board .card.CJD {
+.board-container .board .card.CJD {
   background-image: url('../assets/cards/JD.png');
 }
-.board .card.CJH {
+.board-container .board .card.CJH {
   background-image: url('../assets/cards/JH.png');
 }
-.board .card.CJS {
+.board-container .board .card.CJS {
   background-image: url('../assets/cards/JS.png');
 }
-.board .card.CKC {
+.board-container .board .card.CKC {
   background-image: url('../assets/cards/KC.png');
 }
-.board .card.CKD {
+.board-container .board .card.CKD {
   background-image: url('../assets/cards/KD.png');
 }
-.board .card.CKH {
+.board-container .board .card.CKH {
   background-image: url('../assets/cards/KH.png');
 }
-.board .card.CKS {
+.board-container .board .card.CKS {
   background-image: url('../assets/cards/KS.png');
 }
-.board .card.Cpurple_back {
+.board-container .board .card.Cpurple_back {
   background-image: url('../assets/cards/purple_back.png');
 }
-.board .card.CQC {
+.board-container .board .card.CQC {
   background-image: url('../assets/cards/QC.png');
 }
-.board .card.CQD {
+.board-container .board .card.CQD {
   background-image: url('../assets/cards/QD.png');
 }
-.board .card.CQH {
+.board-container .board .card.CQH {
   background-image: url('../assets/cards/QH.png');
 }
-.board .card.CQS {
+.board-container .board .card.CQS {
   background-image: url('../assets/cards/QS.png');
 }
-.board .card.Cred_back {
+.board-container .board .card.Cred_back {
   background-image: url('../assets/cards/red_back.png');
 }
-.board .card.Cyellow_back {
+.board-container .board .card.Cyellow_back {
   background-image: url('../assets/cards/yellow_back.png');
 }
 /*# sourceMappingURL=game.css.map */
