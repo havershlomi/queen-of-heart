@@ -36,7 +36,9 @@ public class GameController {
         Optional<Game> oGame = gameRepository.findById(gameId);
         if (oGame.isPresent()) {
             Game game = oGame.get();
-
+            if (game.getPlayers().size() < 2) {
+                return Response.Error("Please wait for other players to join");
+            }
             game.setStatus(GameStatus.InProgress);
             gameRepository.save(game);
             gameStatusChange(game);

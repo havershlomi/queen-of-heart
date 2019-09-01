@@ -50,7 +50,14 @@ public class CardController {
         }
 
         if (game.getStatus() == GameStatus.Finished) {
-            GameAction action = new GameAction(GameAction.Actions.GameEnded, new GameEnd(game.getLosingPlayer()).toJson());
+            Player losingPlayer = null;
+            for (Player p : game.getPlayers()) {
+                if (p.getId().equals(game.getLosingPlayer())) {
+                    losingPlayer = p;
+                    break;
+                }
+            }
+            GameAction action = new GameAction(GameAction.Actions.GameEnded, new GameEnd(losingPlayer).toJson());
             List<GameAction> actions = new ArrayList<>();
             actions.add(action);
             return new Response<>("OK", actions);

@@ -29,10 +29,34 @@ public class ActionManager {
         boolean shouldCheckNextAction = true;
 
         //Checks related to history
+        //TODO: handle 3 and jack pick
         List<GameAction> actionHistory = game.getActions();
         if (actionHistory.size() != 0) {
-            GameAction lastAction = actionHistory.get(actionHistory.size() - 1);
-            if (lastAction.getCommand().equals(GameAction.Actions.TakeTwo) && nextAction != QueenOfHeartPicked) {
+            int levels = 2;
+            int index = actionHistory.size() - 1;
+            GameAction lastAction = null;
+            GameAction secondToLastAction = null;
+
+            while (index >= 0 && levels != 0) {
+                GameAction tAction = actionHistory.get(index);
+                if (!tAction.getCommand().equals(GameAction.Actions.CardDraw.name())) {
+                    if (levels == 2) {
+                        lastAction = tAction;
+                        levels--;
+                    } else if (levels == 1) {
+                        secondToLastAction = tAction;
+                        levels--;
+                    }
+                }
+                index--;
+            }
+
+            if (secondToLastAction != null && secondToLastAction.getCommand().equals(GameAction.Actions.TakeTwo.name())) {
+                //If the player took 2 cards already the next player should play now
+                gameAction = generateTakeOneAction(game, currentPlayer);
+                shouldCheckNextAction = false;
+            }
+            if (shouldCheckNextAction && lastAction.getCommand().equals(GameAction.Actions.TakeTwo.name()) && nextAction != QueenOfHeartPicked) {
                 action = new TakeOne(currentPlayer);
                 gameAction = new GameAction(GameAction.Actions.TakeOne, action.toJson());
                 shouldCheckNextAction = false;
@@ -64,7 +88,7 @@ public class ActionManager {
                 case QueenOfHeartPicked:
                     game.setLosingPlayer(currentPlayer.getId());
                     game.setStatus(GameStatus.Finished);
-                    action = new GameEnd(currentPlayer.getId());
+                    action = new GameEnd(currentPlayer);
                     gameAction = new GameAction(GameAction.Actions.QueenOfHeartPicked, action.toJson());
                     break;
                 case Punish:

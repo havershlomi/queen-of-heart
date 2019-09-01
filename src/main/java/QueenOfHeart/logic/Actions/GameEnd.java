@@ -1,9 +1,13 @@
 package QueenOfHeart.logic.Actions;
 
-public class GameEnd extends BaseAction {
-    public long player;
+import QueenOfHeart.model.Player;
 
-    public GameEnd(long player) {
-        this.player = player;
+import java.util.Map;
+
+public class GameEnd extends BaseAction {
+    public Map<String, Object> player;
+
+    public GameEnd(Player player) {
+        this.player = player.getPlayer();
     }
 }
