@@ -126,7 +126,7 @@ export default function Game(props) {
                         let history = response.data.body.history;
                         for (let i = 0; i < history.length; i++) {
                             let card = history[i];
-                            dummyCards[card.cardPosition].cardName = getCardName(card.card.valueName, card.card.type);
+                            dummyCards[card.cardPosition].cardName = getCardName(card.card.value, card.card.type);
                             dummyCards[card.cardPosition].selected = true;
                         }
                         setCards(dummyCards);
@@ -168,9 +168,11 @@ export default function Game(props) {
             setCurrentPlayerId(player.id);
         } else if (body.command === "QueenOfHeartPicked") {
             let player = data.player;
-            updateMessage("top", " Game ended " + player.name + "lost!!");
+            console.log(player);
+            debugger;
+            updateMessage("top", " Game ended " + player.name + " lost!!");
             //redirect to diffrent page
-            props.history.push("/message?msg=game_over");
+            // props.history.push("/message?msg=game_over");
 
         }
     }

@@ -38,7 +38,7 @@ export default function App() {
 
         <div className="app-container">
             <Router>
-                <div>
+                <div style={{textAlign: "center"}}>
                     <Route path="/" exact render={({history}) => (
                         < FormDialog buttonName="Create game" header="Create game" confirmButton="Add"
                                      attributes={["Name"]}
