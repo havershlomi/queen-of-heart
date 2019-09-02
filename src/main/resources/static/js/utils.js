@@ -31,3 +31,12 @@ export function getPlayers(gameId) {
         headers: {'Content-Type': 'application/json; charset=utf-8"'}
     });
 };
+
+export function getPlayer(playerId) {
+    return axios({
+        method: "POST",
+        url: '/player/get',
+        params: {playerId: playerId},
+        headers: {'Content-Type': 'application/json; charset=utf-8"'}
+    });
+};

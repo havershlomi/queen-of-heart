@@ -11,7 +11,7 @@ import queryString from 'query-string'
 // import Cookies from 'js-cookie';
 import Cookies from 'universal-cookie';
 import MySnackbarContentWrapper from "./snack-bar";
-import {isGameValid, isPlayerValid} from './utils';
+import {isGameValid, isPlayerValid, getGame} from './utils';
 
 const stompClient = require('./websocket-listener');
 
@@ -52,12 +52,7 @@ export default function Game(props) {
                 ]);
                 setIsConnected(true);
             }
-            axios({
-                method: "POST",
-                url: '/game/get',
-                params: {gameId: gameId},
-                headers: {'Content-Type': 'application/json; charset=utf-8"'}
-            }).then(response => {
+            getGame(gameId).then(response => {
                     if (response.status === 200) {
                         if (response.data.message == "OK") {
                             if (response.data.body.status.toLowerCase().indexOf("inprogress") !== -1) {
@@ -101,12 +96,7 @@ export default function Game(props) {
         //get the deck from server
         setIsDeckUpdated(true)
 
-        const pResponse = axios({
-            method: "POST",
-            url: '/game/get',
-            params: {gameId: gameId},
-            headers: {'Content-Type': 'application/json; charset=utf-8"'}
-        }).then(response => {
+        const pResponse = getGame(gameId).then(response => {
             if (response.status === 200) {
                 if (response.data.message == "OK") {
                     if (response.data.body.status.toLowerCase().indexOf("ready") !== -1) {
@@ -220,7 +210,6 @@ export default function Game(props) {
     const showDiv = {display: "block"};
 
     return (
-        //TODO:: pass deck here
         <div>
             <div className={"game-ready"} style={(isStarted ? hideDiv : showDiv)}>
                 <h1>Game not started</h1>

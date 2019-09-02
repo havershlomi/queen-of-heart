@@ -57,7 +57,20 @@ public class PlayerController {
         return new Response<>("InvalidGame", null);
     }
 
+    @RequestMapping(path = "/get", method = RequestMethod.POST)
+    public @ResponseBody
+    Response<Map<String, Object>> getPlayer(@RequestParam String playerId) {
+
+        Optional<Player> oPlayer = playerRepository.findByUUID(playerId);
+        if (oPlayer.isPresent()) {
+            return Response.Ok(oPlayer.get().getPlayer());
+        }
+        return new Response<>("InvalidPlayer", null);
+    }
+
     private void updatePlayers(String gameId, List<Map<String, Object>> players) {
         websocket.convertAndSend(WebSocketConfiguration.MESSAGE_PREFIX + "/" + String.valueOf(gameId) + "/player", players);
     }
+
+
 }

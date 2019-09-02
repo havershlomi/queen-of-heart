@@ -1,9 +1,20 @@
 import React from 'react';
 import Card from './card';
+import {getPlayer} from './utils';
 
 export default function Board(props) {
-    const [playerName, setPlayerName] = React.useState("name here");
+    const [playerName, setPlayerName] = React.useState(null);
     //TODO: get player name here
+
+    if (playerName === null) {
+        getPlayer(props.me).then(response => {
+            if (response.status === 200) {
+                if (response.data.message === "OK") {
+                    setPlayerName(response.data.body.name);
+                }
+            }
+        });
+    }
 
     return (
         <div className="board-container">
