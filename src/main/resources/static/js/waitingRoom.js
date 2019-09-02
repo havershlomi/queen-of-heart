@@ -16,7 +16,8 @@ import Grid from '@material-ui/core/Grid';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import UserIcon from '@material-ui/icons/SupervisedUserCircle';
-import {isGameValid, isPlayerValid} from './utils';
+import {isGameValid, isPlayerValid, getGame, getPlayers} from './utils';
+
 const stompClient = require('./websocket-listener');
 
 export default function WaitingRoom(props) {
@@ -51,12 +52,7 @@ export default function WaitingRoom(props) {
         }
         else {
             setGameId(gameId);
-            axios({
-                method: "POST",
-                url: '/game/players',
-                params: {gameId: gameId},
-                headers: {'Content-Type': 'application/json; charset=utf-8"'}
-            }).then(response => {
+            getPlayers(gameId).then(response => {
                     if (response.status === 200) {
                         if (response.data.message == "OK") {
                             setPlayers(response.data.body);
@@ -76,12 +72,7 @@ export default function WaitingRoom(props) {
                 props.history.push("/");
             });
 
-            axios({
-                method: "POST",
-                url: '/game/get',
-                params: {gameId: gameId},
-                headers: {'Content-Type': 'application/json; charset=utf-8"'}
-            }).then(response => {
+            getGame(gameId).then(response => {
                     if (response.status === 200) {
                         if (response.data.message == "OK") {
                             //TODO:: Check for status change
