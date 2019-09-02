@@ -4,11 +4,11 @@ const axios = require('axios')
 import FormDialog from "./material-dialog";
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import queryString from 'query-string'
-import {isGameValid} from './utils';
-
+import {isGameValid, getGame} from './utils';
 
 export default function Player(props) {
     const [gameId, setGameId] = React.useState(null);
+    const [gameName, setGameName] = React.useState(null);
 
     if (gameId === null) {
         const values = queryString.parse(window.location.search);
@@ -20,6 +20,20 @@ export default function Player(props) {
             setGameId(_gameId);
         }
     }
+
+    if (gameId !== null && gameName === null) {
+        getGame(gameId).then(response => {
+            if (response.status === 200) {
+                if (response.data.message === "OK") {
+                    let body = response.data.body;
+                    setGameName(body.name);
+                } else if (response.data.message === "InvalidGame") {
+                    props.history.push("/?msg=invalid_game");
+                }
+            }
+        });
+    }
+
 
     function onPlayerCreate(newPlayer) {
         if (gameId == null)
@@ -60,7 +74,7 @@ export default function Player(props) {
     return (
         //TODO: add validation to forms
         <div>
-            <h2>Game: Name here</h2>
+            <h2>Game: {gameName}</h2>
             <FormDialog buttonName="Join the game" header="Create player" confirmButton="Join"
                         attributes={["Name"]}
                         confirmedAction={onPlayerCreate}/>

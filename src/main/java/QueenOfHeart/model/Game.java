@@ -167,7 +167,7 @@ public class Game {
         Map<String, Object> dictionary = new HashMap<String, Object>();
         dictionary.put("name", this.name);
         dictionary.put("id", this.id);
-        dictionary.put("ceatorId", this.gameCreator.getUuid());
+        dictionary.put("ceatorId", this.gameCreator == null ? null : this.gameCreator.getUuid());
         dictionary.put("status", this.status.toString());
         dictionary.put("history", this.getHistory());
         return dictionary;

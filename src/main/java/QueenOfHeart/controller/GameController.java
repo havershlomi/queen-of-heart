@@ -55,7 +55,7 @@ public class GameController {
             Game game = oGame.get();
             return Response.Ok(game.getGame());
         }
-        return Response.Error(null);
+        return new Response<>("InvalidGame", null);
 
     }
 
