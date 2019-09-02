@@ -4,6 +4,7 @@ const axios = require('axios')
 import FormDialog from "./material-dialog";
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import queryString from 'query-string'
+import {isGameValid} from './utils';
 
 
 export default function Player(props) {
@@ -11,19 +12,13 @@ export default function Player(props) {
 
     if (gameId === null) {
         const values = queryString.parse(window.location.search);
-        let _gameId = parseInt(values.game, 10);
+        let _gameId = values.game;
         if (!isGameValid(_gameId)) {
             props.history.push("/?msg=invalid_game");
         }
         else {
             setGameId(_gameId);
         }
-    }
-
-    function isGameValid(gameId) {
-        if (isNaN(gameId) || gameId <= 0)
-            return false;
-        return true;
     }
 
     function onPlayerCreate(newPlayer) {

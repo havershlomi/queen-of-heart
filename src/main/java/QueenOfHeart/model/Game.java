@@ -1,5 +1,6 @@
 package QueenOfHeart.model;
 
+import org.hibernate.annotations.GenericGenerator;
 import sun.net.www.content.text.PlainTextInputStream;
 
 import javax.persistence.*;
@@ -7,16 +8,22 @@ import javax.validation.constraints.NotNull;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import org.hibernate.*;
+
 @Entity(name = "Game")
 @Table(name = "Games")
 public class Game {
     //TODO:: add uuid for evety access to this object instead of id should bu unique
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @NotNull
     private String name;
+
+    @NotNull
+    private String uuid;
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Date creationTime;
@@ -30,9 +37,11 @@ public class Game {
     private Player gameCreator;
 
     public Game() {
+        this.uuid = String.valueOf(UUID.randomUUID());
         this.setStatus(GameStatus.Ready);
         this.setLosingPlayer(-1);
         this.creationTime = Utils.getCurrentUtcTime();
+
     }
 
     @OneToMany(mappedBy = "game")
@@ -110,8 +119,12 @@ public class Game {
         this.direaction = direaction * -1;
     }
 
-    public long getId() {
+    public Long getId() {
         return this.id;
+    }
+
+    public String getUuid() {
+        return uuid;
     }
 
     public void addPlayer(Player player) {

@@ -11,7 +11,7 @@ import queryString from 'query-string'
 // import Cookies from 'js-cookie';
 import Cookies from 'universal-cookie';
 import MySnackbarContentWrapper from "./snack-bar";
-
+import {isGameValid} from './utils';
 const stompClient = require('./websocket-listener');
 
 export default function Game(props) {
@@ -46,8 +46,8 @@ export default function Game(props) {
     }
 
     if (gameId === null) {
-        gameId = parseInt(values.game, 10);
-        if (!isIntValid(gameId)) {
+        gameId = values.game;
+        if (!isGameValid(gameId)) {
             props.history.push("/?msg=invalid_game");
         } else {
             setGameId(gameId);

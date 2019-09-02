@@ -23,17 +23,17 @@ public class GameController {
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public @ResponseBody
-    Response<Long> addNewGame(@RequestParam String name) {
+    Response<String> addNewGame(@RequestParam String name) {
         Game n = new Game();
         n.setName(name);
         gameRepository.save(n);
-        return new Response<>("Game Added", n.getId());
+        return new Response<>("Game Added", n.getUuid());
     }
 
     @RequestMapping(path = "/start", method = RequestMethod.POST)
     public @ResponseBody
-    Response<String> startGame(@RequestParam Long gameId) {
-        Optional<Game> oGame = gameRepository.findById(gameId);
+    Response<String> startGame(@RequestParam String gameId) {
+        Optional<Game> oGame = gameRepository.findByUUID(gameId);
         if (oGame.isPresent()) {
             Game game = oGame.get();
             if (game.getPlayers().size() < 2) {
@@ -49,8 +49,8 @@ public class GameController {
 
     @RequestMapping(path = "/get", method = RequestMethod.POST)
     public @ResponseBody
-    Response<Game> getGame(@RequestParam Long gameId) {
-        Optional<Game> oGame = gameRepository.findById(gameId);
+    Response<Game> getGame(@RequestParam String gameId) {
+        Optional<Game> oGame = gameRepository.findByUUID(gameId);
         if (oGame.isPresent()) {
             Game game = oGame.get();
             return Response.Ok(game);
@@ -61,8 +61,8 @@ public class GameController {
 
     @RequestMapping(path = "/players", method = RequestMethod.POST)
     public @ResponseBody
-    Response<List<Map<String, Object>>> getPlayers(@RequestParam Long gameId) {
-        Optional<Game> oGame = gameRepository.findById(gameId);
+    Response<List<Map<String, Object>>> getPlayers(@RequestParam String gameId) {
+        Optional<Game> oGame = gameRepository.findByUUID(gameId);
 
         if (oGame.isPresent()) {
             Game game = oGame.get();

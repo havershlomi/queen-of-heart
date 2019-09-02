@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @EnableScheduling
@@ -39,9 +41,13 @@ public class CardController {
 
     @RequestMapping(path = "/draw", method = RequestMethod.POST)
     public @ResponseBody
-    Response<List<GameAction>> drawCard(@RequestParam long playerId, @RequestParam long gameId, @RequestParam int cardPosition) {
+    Response<List<GameAction>> drawCard(@RequestParam long playerId, @RequestParam String gameId, @RequestParam int cardPosition) {
+        Optional<Game> oGame = gameRepository.findByUUID(gameId);
+        if (!oGame.isPresent()) {
+            return Response.Error(null);
+        }
 
-        Game game = gameRepository.findById(gameId).get();
+        Game game = oGame.get();
         if (!game.isPlayerBelongs(playerId)) {
             GameAction action = new GameAction(GameAction.Actions.Error, new ErrorAction("Game doesn't exist").toJson());
             List<GameAction> actions = new ArrayList<>();
@@ -85,7 +91,7 @@ public class CardController {
 
         for (GameAction action : actions) {
             actionRepository.save(action);
-            updateCards(game.getId(), action);
+            updateCards(game.getUuid(), action);
         }
         gameRepository.save(game);
 
@@ -121,7 +127,7 @@ public class CardController {
         return new Deck(usedCards);
     }
 
-    private void updateCards(Long gameId, GameAction gameAction) {
+    private void updateCards(String gameId, GameAction gameAction) {
         websocket.convertAndSend(WebSocketConfiguration.MESSAGE_PREFIX + "/" + String.valueOf(gameId) + "/draw", gameAction);
     }
 

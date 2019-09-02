@@ -16,7 +16,7 @@ import Grid from '@material-ui/core/Grid';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import UserIcon from '@material-ui/icons/SupervisedUserCircle';
-
+import {isGameValid} from './utils';
 const stompClient = require('./websocket-listener');
 
 export default function WaitingRoom(props) {
@@ -45,8 +45,8 @@ export default function WaitingRoom(props) {
     }
 
     if (gameId === null) {
-        gameId = parseInt(values.game, 10);
-        if (!isIntValid(gameId)) {
+        gameId = values.game;
+        if (!isGameValid(gameId)) {
             props.history.push("/?msg=invalid_game");
         }
         else {
@@ -100,7 +100,7 @@ export default function WaitingRoom(props) {
     }
 
     function isIntValid(id) {
-        if (isNaN(id) || id <= 0)
+        if (id === undefined || id === null)
             return false;
         return true;
     }
@@ -160,7 +160,8 @@ export default function WaitingRoom(props) {
                 <h2>Who is going to play</h2>
                 <div>
                     <h3>Invite people to join</h3>
-                    <input className="share-link" type="text" readOnly value={location.origin + "/player?game=" + gameId}/>
+                    <input className="share-link" type="text" readOnly
+                           value={location.origin + "/player?game=" + gameId}/>
                 </div>
             </div>
             <Grid container spacing={2} wrap="nowrap">
@@ -175,7 +176,7 @@ export default function WaitingRoom(props) {
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText
-                                    primary={player.name + (player.id === playerId ? " - You":"")}
+                                    primary={player.name + (player.id === playerId ? " - You" : "")}
                                 />
                             </ListItem>)
                         })}

@@ -32,8 +32,8 @@ public class PlayerController {
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public @ResponseBody
-    Response<Long> addPlayerToGame(@RequestParam String name, @RequestParam long gameId, HttpServletResponse response) {
-        Optional<Game> oGame = gameRepository.findById(gameId);
+    Response<Long> addPlayerToGame(@RequestParam String name, @RequestParam String gameId, HttpServletResponse response) {
+        Optional<Game> oGame = gameRepository.findByUUID(gameId);
         if (oGame.isPresent()) {
             Game game = oGame.get();
             if (game.getStatus() == GameStatus.Ready) {
@@ -57,7 +57,7 @@ public class PlayerController {
         return new Response<>("InvalidGame", -1L);
     }
 
-    private void updatePlayers(Long gameId, List<Map<String, Object>> players) {
+    private void updatePlayers(String gameId, List<Map<String, Object>> players) {
         websocket.convertAndSend(WebSocketConfiguration.MESSAGE_PREFIX + "/" + String.valueOf(gameId) + "/player", players);
     }
 }

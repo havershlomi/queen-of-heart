@@ -63,10 +63,6 @@ public class GamePlayHistory {
         return this.player.getId();
     }
 
-    public long getGameId() {
-        return this.game.getId();
-    }
-
     public Card getCard() {
         return Card.getCard(this.card);
     }

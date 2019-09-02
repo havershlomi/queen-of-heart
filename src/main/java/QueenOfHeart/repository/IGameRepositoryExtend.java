@@ -5,5 +5,4 @@ import QueenOfHeart.model.Game;
 import java.util.List;
 
 public interface IGameRepositoryExtend {
-//    List<Game> findActiveGames();
 }
