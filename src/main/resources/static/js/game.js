@@ -11,7 +11,8 @@ import queryString from 'query-string'
 // import Cookies from 'js-cookie';
 import Cookies from 'universal-cookie';
 import MySnackbarContentWrapper from "./snack-bar";
-import {isGameValid} from './utils';
+import {isGameValid, isPlayerValid} from './utils';
+
 const stompClient = require('./websocket-listener');
 
 export default function Game(props) {
@@ -38,12 +39,6 @@ export default function Game(props) {
     }, [cards]);
 
     const values = queryString.parse(window.location.search);
-
-    function isIntValid(id) {
-        if (isNaN(id) || id <= 0)
-            return false;
-        return true;
-    }
 
     if (gameId === null) {
         gameId = values.game;
@@ -87,9 +82,9 @@ export default function Game(props) {
     if (playerId === null && values.msg === undefined) {
         //TODO: get this information from cookie
         // let player = parseInt(cookies.get('q_player'), 10);
-        playerId = parseInt(values.player, 10);
+        playerId = values.player;
 
-        if (!isIntValid(playerId)) {
+        if (!isPlayerValid(playerId)) {
             props.history.push("/player?game=" + gameId + "&msg=invalid_player");
             return;
         } else {

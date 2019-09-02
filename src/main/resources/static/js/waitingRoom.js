@@ -16,7 +16,7 @@ import Grid from '@material-ui/core/Grid';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import UserIcon from '@material-ui/icons/SupervisedUserCircle';
-import {isGameValid} from './utils';
+import {isGameValid, isPlayerValid} from './utils';
 const stompClient = require('./websocket-listener');
 
 export default function WaitingRoom(props) {
@@ -34,9 +34,9 @@ export default function WaitingRoom(props) {
     if (playerId === null && values.msg === undefined) {
         //TODO: get this information from cookie
         // let player = parseInt(cookies.get('q_player'), 10);
-        playerId = parseInt(values.player, 10);
+        playerId = values.player;
 
-        if (!isIntValid(playerId)) {
+        if (!isPlayerValid(playerId)) {
             props.history.push("/player?game=" + gameId + "&msg=invalid_player");
             return;
         } else {
@@ -85,7 +85,11 @@ export default function WaitingRoom(props) {
                     if (response.status === 200) {
                         if (response.data.message == "OK") {
                             //TODO:: Check for status change
-                            setOwnerId(response.data.body.gameCreator.id);
+                            let body = response.data.body;
+                            setOwnerId(body.ceatorId);
+                            if (body.status.toLowerCase().indexOf("inprogress") !== -1) {
+                                props.history.push("/game?game=" + gameId + "&player=" + playerId);
+                            }
                         } else {
                             props.history.push("/");
                         }
@@ -99,12 +103,6 @@ export default function WaitingRoom(props) {
         }
     }
 
-    function isIntValid(id) {
-        if (id === undefined || id === null)
-            return false;
-        return true;
-    }
-
     function addPlayer(response) {
         var data = JSON.parse(response.body)
         setPlayers(data);
@@ -115,7 +113,6 @@ export default function WaitingRoom(props) {
         if (body.ceatorId === playerId)
             return;
         if (body.status.toLowerCase().indexOf("inprogress") !== -1) {
-            debugger;
             props.history.push("/game?game=" + gameId + "&player=" + playerId);
         }
     }

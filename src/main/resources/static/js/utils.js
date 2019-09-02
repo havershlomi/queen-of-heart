@@ -3,3 +3,10 @@ export function isGameValid (gameId) {
         return false;
     return true;
 }
+
+
+export function isPlayerValid (playerId) {
+    if (playerId === undefined || playerId === null)
+        return false;
+    return true;
+}

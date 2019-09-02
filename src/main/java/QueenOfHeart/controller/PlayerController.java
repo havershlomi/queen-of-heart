@@ -32,7 +32,7 @@ public class PlayerController {
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public @ResponseBody
-    Response<Long> addPlayerToGame(@RequestParam String name, @RequestParam String gameId, HttpServletResponse response) {
+    Response<String> addPlayerToGame(@RequestParam String name, @RequestParam String gameId, HttpServletResponse response) {
         Optional<Game> oGame = gameRepository.findByUUID(gameId);
         if (oGame.isPresent()) {
             Game game = oGame.get();
@@ -49,12 +49,12 @@ public class PlayerController {
 
                 List<Map<String, Object>> players = game.getPlayersObj();
                 updatePlayers(gameId, players);
-                return new Response<>("OK", p.getId());
+                return Response.Ok(String.valueOf(p.getUuid()));
             } else {
-                return new Response<>("Can't add player in the middle of a game", -1L);
+                return new Response<>("Can't add player in the middle of a game", null);
             }
         }
-        return new Response<>("InvalidGame", -1L);
+        return new Response<>("InvalidGame", null);
     }
 
     private void updatePlayers(String gameId, List<Map<String, Object>> players) {

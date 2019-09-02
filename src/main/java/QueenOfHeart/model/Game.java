@@ -41,7 +41,6 @@ public class Game {
         this.setStatus(GameStatus.Ready);
         this.setLosingPlayer(-1);
         this.creationTime = Utils.getCurrentUtcTime();
-
     }
 
     @OneToMany(mappedBy = "game")
@@ -138,6 +137,10 @@ public class Game {
         return this.gameCreator;
     }
 
+    public Map<String, Object> getGameCreatorObj() {
+        return this.gameCreator.getPlayer();
+    }
+
     public void addAction(GameAction action) {
         actions.add(action);
         action.setGame(this);
@@ -164,8 +167,9 @@ public class Game {
         Map<String, Object> dictionary = new HashMap<String, Object>();
         dictionary.put("name", this.name);
         dictionary.put("id", this.id);
-        dictionary.put("ceatorId", this.gameCreator.getId());
+        dictionary.put("ceatorId", this.gameCreator.getUuid());
         dictionary.put("status", this.status.toString());
+        dictionary.put("history", this.getHistory());
         return dictionary;
     }
 }

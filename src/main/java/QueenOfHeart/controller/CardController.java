@@ -41,14 +41,21 @@ public class CardController {
 
     @RequestMapping(path = "/draw", method = RequestMethod.POST)
     public @ResponseBody
-    Response<List<GameAction>> drawCard(@RequestParam long playerId, @RequestParam String gameId, @RequestParam int cardPosition) {
+    Response<List<GameAction>> drawCard(@RequestParam String playerId, @RequestParam String gameId, @RequestParam int cardPosition) {
         Optional<Game> oGame = gameRepository.findByUUID(gameId);
         if (!oGame.isPresent()) {
             return Response.Error(null);
         }
 
+        Optional<Player> oPlayer = playerRepository.findByUUID(playerId);
+        if (!oPlayer.isPresent()) {
+            return Response.Error(null);
+        }
+        Player player = oPlayer.get();
+
+
         Game game = oGame.get();
-        if (!game.isPlayerBelongs(playerId)) {
+        if (!game.isPlayerBelongs(player.getId())) {
             GameAction action = new GameAction(GameAction.Actions.Error, new ErrorAction("Game doesn't exist").toJson());
             List<GameAction> actions = new ArrayList<>();
             actions.add(action);
@@ -69,7 +76,6 @@ public class CardController {
             return new Response<>("OK", actions);
         }
 
-        Player player = playerRepository.findById(playerId).get();
 
         if (!canDrawCard(game, player)) {
             GameAction action = new GameAction(GameAction.Actions.Error, new ErrorAction("It isn't your turn!").toJson());

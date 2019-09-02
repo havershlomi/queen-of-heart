@@ -13,6 +13,9 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "my_entity_seq_gen")
     private Long id;
 
+    @NotNull
+    private String uuid;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "GAME_ID")
     private Game game;
@@ -26,12 +29,12 @@ public class Player {
     }
 
     public Player(String name, Game game) {
+        this.uuid = String.valueOf(UUID.randomUUID());
         this.name = name;
         this.game = game;
         this.position = game.getPlayers().size() + 1;
     }
 
-    //    story> gamePlayes = new HashSet<>();
     public String getName() {
         return name;
     }
@@ -52,6 +55,10 @@ public class Player {
         return id;
     }
 
+    public String getUuid(){
+        return this.uuid;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Player) {
@@ -63,7 +70,7 @@ public class Player {
     public Map<String, Object> getPlayer() {
         Map<String, Object> dictionary = new HashMap<String, Object>();
         dictionary.put("name", this.name);
-        dictionary.put("id", this.id);
+        dictionary.put("id", this.uuid);
         return dictionary;
     }
 }

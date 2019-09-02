@@ -49,11 +49,11 @@ public class GameController {
 
     @RequestMapping(path = "/get", method = RequestMethod.POST)
     public @ResponseBody
-    Response<Game> getGame(@RequestParam String gameId) {
+    Response<Map<String, Object>> getGame(@RequestParam String gameId) {
         Optional<Game> oGame = gameRepository.findByUUID(gameId);
         if (oGame.isPresent()) {
             Game game = oGame.get();
-            return Response.Ok(game);
+            return Response.Ok(game.getGame());
         }
         return Response.Error(null);
 
@@ -76,6 +76,6 @@ public class GameController {
 
     private void gameStatusChange(Game game) {
         Map<String, Object> msg = game.getGame();
-        websocket.convertAndSend(WebSocketConfiguration.MESSAGE_PREFIX + "/" + String.valueOf(game.getId()) + "/status", msg);
+        websocket.convertAndSend(WebSocketConfiguration.MESSAGE_PREFIX + "/" + String.valueOf(game.getUuid()) + "/status", msg);
     }
 }
