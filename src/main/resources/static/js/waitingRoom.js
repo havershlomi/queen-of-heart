@@ -168,7 +168,7 @@ export default function WaitingRoom(props) {
                 <Grid item xs={6} md={4} lg={2}>
                     <List dense={false}>
                         {players.map(player => {
-                            return (<ListItem key={player}>
+                            return (<ListItem key={player.id}>
                                 <ListItemAvatar>
                                     <Avatar>
                                         <UserIcon/>
