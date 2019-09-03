@@ -13,7 +13,6 @@ import org.hibernate.*;
 @Entity(name = "Game")
 @Table(name = "Games")
 public class Game {
-    //TODO:: add uuid for evety access to this object instead of id should bu unique
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

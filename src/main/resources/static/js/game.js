@@ -25,6 +25,7 @@ export default function Game(props) {
     const [currentPlayer, setCurrentPlayer] = React.useState(null);
     const [lastCard, setLastCard] = React.useState("Cblue_back");
     const [isDrawing, setIsDrawing] = React.useState(false);
+    const [autoPickCard, setAutoPickCard] = React.useState(null);
 
     const [cards, setCards] = React.useState([]);
     const cardsRef = React.useRef(cards);
@@ -116,7 +117,9 @@ export default function Game(props) {
                             dummyCards[card.cardPosition].selected = true;
                         }
                         setCards(dummyCards);
-                        setLastCard(getCardName(history[history.length - 1].card.value, history[history.length - 1].card.type));
+                        if (history.length > 0) {
+                            setLastCard(getCardName(history[history.length - 1].card.value, history[history.length - 1].card.type));
+                        }
                     }
                     return {status: true, data: response.data};
                 }
@@ -151,11 +154,11 @@ export default function Game(props) {
             let player = data.player;
             updateMessage("top", "It's " + player.name + "'s turn now.");
             setCurrentPlayer(player);
-            setCurrentPlayerId(player.id);
+            handleNextTurn(player.id);
         } else if (body.command === "TakeTwo") {
             let player = data.player;
             setCurrentPlayer(player);
-
+            handleNextTurn(player.id);
             updateMessage("top", player.name + " needs to pick 2 cards" +
                 " now.");
             setCurrentPlayerId(player.id);
@@ -168,6 +171,23 @@ export default function Game(props) {
             // props.history.push("/message?msg=game_over");
         }
     }
+
+    const handleNextTurn = (nextPlayerId) => {
+        setCurrentPlayerId(nextPlayerId);
+        if (playerId === nextPlayerId) {
+            let token = setTimeout(() => {
+                setIsDrawing(true);
+                let _cards = cardsRef.current;
+                for (let i = 0; i < _cards.length; i++) {
+                    if (!_cards[i].selected) {
+                        drawCard(i);
+                        break;
+                    }
+                }
+            }, 3000);
+            setAutoPickCard(token);
+        }
+    };
 
     const updateMessage = (type, message) => {
         if (type == "bottom") {
@@ -185,6 +205,11 @@ export default function Game(props) {
             return new Promise((resolve, reject) => {
                 resolve({status: false});
             });
+
+        if (autoPickCard !== null) {
+            clearTimeout(autoPickCard);
+            setAutoPickCard(null);
+        }
         setIsDrawing(true);
         const pResponse = axios({
             method: "POST",

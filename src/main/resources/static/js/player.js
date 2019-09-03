@@ -72,7 +72,6 @@ export default function Player(props) {
     }
 
     return (
-        //TODO: add validation to forms
         <div>
             <h2>Game: {gameName}</h2>
             <FormDialog buttonName="Join the game" header="Create player" confirmButton="Join"
