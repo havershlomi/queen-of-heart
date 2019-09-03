@@ -16,200 +16,213 @@ body .share-link {
   display: inline-block;
   margin: 60px 0 0 0;
 }
-.board-container .board {
-  height: 100%;
-  max-width: 432px;
-  margin: 5px auto;
-  overflow: auto;
+.board-container .header .turn-label {
+  display: inline-block;
+  float: left;
+  font-size: 20px;
+  width: 50px;
+  margin: 30px 0 0 0;
+  text-align: center;
+  overflow: hidden;
 }
-.board-container .board .card {
+.board-container .header .card {
+  float: right;
+  margin: 13px 3px 0px 0;
+}
+.board-container .card {
   display: inline-block;
   float: left;
   min-width: 50px;
   min-height: 75px;
   margin: 4px;
 }
+.board-container .board {
+  height: 100%;
+  max-width: 432px;
+  margin: 5px auto;
+  overflow: auto;
+}
 .board-container .board .card:hover {
   cursor: pointer;
 }
-.board-container .board .card {
+.board-container .card {
   background-image: url('../assets/sprite_cards.png');
   background-repeat: no-repeat;
   -webkit-background-size: cover;
   background-size: cover;
 }
-.board-container .board .card.C2C {
+.board-container .card.C2C {
   background-image: url('../assets/cards/2C.png');
 }
-.board-container .board .card.C2D {
+.board-container .card.C2D {
   background-image: url('../assets/cards/2D.png');
 }
-.board-container .board .card.C2H {
+.board-container .card.C2H {
   background-image: url('../assets/cards/2H.png');
 }
-.board-container .board .card.C2S {
+.board-container .card.C2S {
   background-image: url('../assets/cards/2S.png');
 }
-.board-container .board .card.C3C {
+.board-container .card.C3C {
   background-image: url('../assets/cards/3C.png');
 }
-.board-container .board .card.C3D {
+.board-container .card.C3D {
   background-image: url('../assets/cards/3D.png');
 }
-.board-container .board .card.C3H {
+.board-container .card.C3H {
   background-image: url('../assets/cards/3H.png');
 }
-.board-container .board .card.C3S {
+.board-container .card.C3S {
   background-image: url('../assets/cards/3S.png');
 }
-.board-container .board .card.C4C {
+.board-container .card.C4C {
   background-image: url('../assets/cards/4C.png');
 }
-.board-container .board .card.C4D {
+.board-container .card.C4D {
   background-image: url('../assets/cards/4D.png');
 }
-.board-container .board .card.C4H {
+.board-container .card.C4H {
   background-image: url('../assets/cards/4H.png');
 }
-.board-container .board .card.C4S {
+.board-container .card.C4S {
   background-image: url('../assets/cards/4S.png');
 }
-.board-container .board .card.C5C {
+.board-container .card.C5C {
   background-image: url('../assets/cards/5C.png');
 }
-.board-container .board .card.C5D {
+.board-container .card.C5D {
   background-image: url('../assets/cards/5D.png');
 }
-.board-container .board .card.C5H {
+.board-container .card.C5H {
   background-image: url('../assets/cards/5H.png');
 }
-.board-container .board .card.C5S {
+.board-container .card.C5S {
   background-image: url('../assets/cards/5S.png');
 }
-.board-container .board .card.C6C {
+.board-container .card.C6C {
   background-image: url('../assets/cards/6C.png');
 }
-.board-container .board .card.C6D {
+.board-container .card.C6D {
   background-image: url('../assets/cards/6D.png');
 }
-.board-container .board .card.C6H {
+.board-container .card.C6H {
   background-image: url('../assets/cards/6H.png');
 }
-.board-container .board .card.C6S {
+.board-container .card.C6S {
   background-image: url('../assets/cards/6S.png');
 }
-.board-container .board .card.C7C {
+.board-container .card.C7C {
   background-image: url('../assets/cards/7C.png');
 }
-.board-container .board .card.C7D {
+.board-container .card.C7D {
   background-image: url('../assets/cards/7D.png');
 }
-.board-container .board .card.C7H {
+.board-container .card.C7H {
   background-image: url('../assets/cards/7H.png');
 }
-.board-container .board .card.C7S {
+.board-container .card.C7S {
   background-image: url('../assets/cards/7S.png');
 }
-.board-container .board .card.C8C {
+.board-container .card.C8C {
   background-image: url('../assets/cards/8C.png');
 }
-.board-container .board .card.C8D {
+.board-container .card.C8D {
   background-image: url('../assets/cards/8D.png');
 }
-.board-container .board .card.C8H {
+.board-container .card.C8H {
   background-image: url('../assets/cards/8H.png');
 }
-.board-container .board .card.C8S {
+.board-container .card.C8S {
   background-image: url('../assets/cards/8S.png');
 }
-.board-container .board .card.C9C {
+.board-container .card.C9C {
   background-image: url('../assets/cards/9C.png');
 }
-.board-container .board .card.C9D {
+.board-container .card.C9D {
   background-image: url('../assets/cards/9D.png');
 }
-.board-container .board .card.C9H {
+.board-container .card.C9H {
   background-image: url('../assets/cards/9H.png');
 }
-.board-container .board .card.C9S {
+.board-container .card.C9S {
   background-image: url('../assets/cards/9S.png');
 }
-.board-container .board .card.C10C {
+.board-container .card.C10C {
   background-image: url('../assets/cards/10C.png');
 }
-.board-container .board .card.C10D {
+.board-container .card.C10D {
   background-image: url('../assets/cards/10D.png');
 }
-.board-container .board .card.C10H {
+.board-container .card.C10H {
   background-image: url('../assets/cards/10H.png');
 }
-.board-container .board .card.C10S {
+.board-container .card.C10S {
   background-image: url('../assets/cards/10S.png');
 }
-.board-container .board .card.CAC {
+.board-container .card.CAC {
   background-image: url('../assets/cards/AC.png');
 }
-.board-container .board .card.CAD {
+.board-container .card.CAD {
   background-image: url('../assets/cards/AD.png');
 }
-.board-container .board .card.CAH {
+.board-container .card.CAH {
   background-image: url('../assets/cards/AH.png');
 }
-.board-container .board .card.CAS {
+.board-container .card.CAS {
   background-image: url('../assets/cards/AS.png');
 }
-.board-container .board .card.Cblue_back {
+.board-container .card.Cblue_back {
   background-image: url('../assets/cards/blue_back.png');
 }
-.board-container .board .card.Cgray_back {
+.board-container .card.Cgray_back {
   background-image: url('../assets/cards/gray_back.png');
 }
-.board-container .board .card.Cgreen_back {
+.board-container .card.Cgreen_back {
   background-image: url('../assets/cards/green_back.png');
 }
-.board-container .board .card.CJC {
+.board-container .card.CJC {
   background-image: url('../assets/cards/JC.png');
 }
-.board-container .board .card.CJD {
+.board-container .card.CJD {
   background-image: url('../assets/cards/JD.png');
 }
-.board-container .board .card.CJH {
+.board-container .card.CJH {
   background-image: url('../assets/cards/JH.png');
 }
-.board-container .board .card.CJS {
+.board-container .card.CJS {
   background-image: url('../assets/cards/JS.png');
 }
-.board-container .board .card.CKC {
+.board-container .card.CKC {
   background-image: url('../assets/cards/KC.png');
 }
-.board-container .board .card.CKD {
+.board-container .card.CKD {
   background-image: url('../assets/cards/KD.png');
 }
-.board-container .board .card.CKH {
+.board-container .card.CKH {
   background-image: url('../assets/cards/KH.png');
 }
-.board-container .board .card.CKS {
+.board-container .card.CKS {
   background-image: url('../assets/cards/KS.png');
 }
-.board-container .board .card.Cpurple_back {
+.board-container .card.Cpurple_back {
   background-image: url('../assets/cards/purple_back.png');
 }
-.board-container .board .card.CQC {
+.board-container .card.CQC {
   background-image: url('../assets/cards/QC.png');
 }
-.board-container .board .card.CQD {
+.board-container .card.CQD {
   background-image: url('../assets/cards/QD.png');
 }
-.board-container .board .card.CQH {
+.board-container .card.CQH {
   background-image: url('../assets/cards/QH.png');
 }
-.board-container .board .card.CQS {
+.board-container .card.CQS {
   background-image: url('../assets/cards/QS.png');
 }
-.board-container .board .card.Cred_back {
+.board-container .card.Cred_back {
   background-image: url('../assets/cards/red_back.png');
 }
-.board-container .board .card.Cyellow_back {
+.board-container .card.Cyellow_back {
   background-image: url('../assets/cards/yellow_back.png');
 }
 /*# sourceMappingURL=game.css.map */

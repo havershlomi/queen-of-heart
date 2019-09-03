@@ -7,7 +7,7 @@ body {
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   }
 
-  .share-link{
+  .share-link {
     min-width: 200px;
     height: 2em;
     border-color: black;
@@ -24,26 +24,38 @@ body {
       display: inline-block;
       margin: 60px 0 0 0;
     }
+    .turn-label {
+      display: inline-block;
+      float: left;
+      font-size: 20px;
+      width: 50px;
+      margin: 30px 0 0 0;
+      text-align: center;
+      overflow: hidden;
+    }
+    .card {
+      float: right;
+      margin: 13px 3px 0px 0;
+    }
   }
-
+  .card {
+    display: inline-block;
+    float: left;
+    min-width: @cardMinWidth;
+    min-height: @cardMinHeight;
+    margin: @cardMargin;
+  }
   .board {
     height: 100%;
     max-width: (@cardMinWidth+@cardMargin)*8;
     margin: 5px auto;
     overflow: auto;
 
-    .card {
-      display: inline-block;
-      float: left;
-      min-width: @cardMinWidth;
-      min-height: @cardMinHeight;
-      margin: @cardMargin;
-    }
-
     .card:hover {
       cursor: pointer;
     }
 
-    @import "cards";
   }
+  @import "cards";
+
 }
