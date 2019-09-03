@@ -51,24 +51,16 @@ public class GamePlayHistory {
         return this.card;
     }
 
-    public int getCardPosition() {
-        return this.cardPosition;
-    }
-
-    public Date getTime() {
-        return this.time;
-    }
-
-    public long getPlayerId() {
-        return this.player.getId();
-    }
-
     public Card getCard() {
         return Card.getCard(this.card);
     }
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public int getCardPosition() {
+        return cardPosition;
     }
 
     @Override

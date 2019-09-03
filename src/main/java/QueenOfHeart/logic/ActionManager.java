@@ -71,7 +71,7 @@ public class ActionManager {
                     break;
                 case SkipNext:
                     nextPlayer = getNextPlayer(game, currentPlayer);
-                    actions.add(new GameAction(GameAction.Actions.SkipNext, new Skip(nextPlayer.getId()).toJson()));
+                    actions.add(new GameAction(GameAction.Actions.SkipNext, new Skip(nextPlayer.getUuid()).toJson()));
                     gameAction = generateTakeOneAction(game, nextPlayer);
                     break;
                 case ChangeDirection:
@@ -93,7 +93,7 @@ public class ActionManager {
                     gameAction = new GameAction(GameAction.Actions.QueenOfHeartPicked, action.toJson());
                     break;
                 case Punish:
-                    action = new Punish(currentPlayer.getId());
+                    action = new Punish(currentPlayer.getUuid());
                     gameAction = new GameAction(Punish, action.toJson());
                     break;
             }
@@ -141,29 +141,29 @@ public class ActionManager {
     }
 
     private static GameAction generateTake3TogheterAction(@Reference Game game, Player currentPlayer) {
-        List<Long> playerIds = new ArrayList<>();
+        List<String> playerIds = new ArrayList<>();
         if (game.getPlayers().size() <= 5) {
 
             for (Player player : game.getPlayers()) {
-                playerIds.add(player.getId());
+                playerIds.add(player.getUuid());
             }
         } else {
             //TODO: refactor that better
-            playerIds.add(currentPlayer.getId());
+            playerIds.add(currentPlayer.getUuid());
             Player nextPlayer;
             //1 a head
             nextPlayer = getNextPlayer(game, currentPlayer);
-            playerIds.add(nextPlayer.getId());
+            playerIds.add(nextPlayer.getUuid());
             //2 a head
             nextPlayer = getNextPlayer(game, nextPlayer);
-            playerIds.add(nextPlayer.getId());
+            playerIds.add(nextPlayer.getUuid());
             game.changeDireaction();
             //1 before
             nextPlayer = getNextPlayer(game, currentPlayer);
-            playerIds.add(nextPlayer.getId());
+            playerIds.add(nextPlayer.getUuid());
             //2 before
             nextPlayer = getNextPlayer(game, nextPlayer);
-            playerIds.add(nextPlayer.getId());
+            playerIds.add(nextPlayer.getUuid());
             game.changeDireaction();
         }
         BaseAction baseAction = new Take3Together(playerIds);

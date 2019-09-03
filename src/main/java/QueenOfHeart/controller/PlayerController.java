@@ -45,7 +45,8 @@ public class PlayerController {
                 HttpHeaders headers = new HttpHeaders();
                 headers.add("Set-Cookie", "key=" + "value");
                 ResponseEntity.status(HttpStatus.OK).headers(headers).build();
-                response.addCookie(new Cookie("q_player", String.valueOf(p.getId())));
+                response.addCookie(new Cookie("q_player", String.valueOf(p.getUuid()
+                )));
 
                 List<Map<String, Object>> players = game.getPlayersObj();
                 updatePlayers(gameId, players);

@@ -38,7 +38,6 @@ public class CardController {
     @Autowired
     private EntityLinks entityLinks;
 
-
     @RequestMapping(path = "/draw", method = RequestMethod.POST)
     public @ResponseBody
     Response<List<GameAction>> drawCard(@RequestParam String playerId, @RequestParam String gameId, @RequestParam int cardPosition) {
@@ -75,7 +74,6 @@ public class CardController {
             actions.add(action);
             return new Response<>("OK", actions);
         }
-
 
         if (!canDrawCard(game, player)) {
             GameAction action = new GameAction(GameAction.Actions.Error, new ErrorAction("It isn't your turn!").toJson());
@@ -115,7 +113,7 @@ public class CardController {
             if (command.equals(GameAction.Actions.TakeOne.name()) ||
                     command.equals(GameAction.Actions.TakeTwo.name()) ||
                     command.equals(GameAction.Actions.Take3Together.name())) {
-                if (action.getData().contains(String.valueOf(player.getId()))) {
+                if (action.getData().contains(String.valueOf(player.getUuid()))) {
                     return true;
                 }
             }

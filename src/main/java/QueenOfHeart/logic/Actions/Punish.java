@@ -2,9 +2,9 @@ package QueenOfHeart.logic.Actions;
 
 public class Punish extends BaseAction {
     //punishing player
-    public long player;
+    public String player;
 
-    public Punish(long player) {
+    public Punish(String player) {
         this.player = player;
     }
 }

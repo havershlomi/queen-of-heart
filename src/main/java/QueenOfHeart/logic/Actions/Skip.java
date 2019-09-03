@@ -2,9 +2,9 @@ package QueenOfHeart.logic.Actions;
 
 public class Skip extends BaseAction {
     //Skipping this player
-    public long player;
+    public String player;
 
-    public Skip(long player) {
+    public Skip(String player) {
         this.player = player;
     }
 }
