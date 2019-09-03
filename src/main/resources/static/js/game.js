@@ -22,6 +22,9 @@ export default function Game(props) {
     const [isConnected, setIsConnected] = React.useState(false);
     const [isDeckUpdated, setIsDeckUpdated] = React.useState(false);
     let [isStarted, setIsStarted] = React.useState(true);
+    const [currentPlayer, setCurrentPlayer] = React.useState(null);
+    const [lastCard, setLastCard] = React.useState("Cblue_back");
+    const [isDrawing, setIsDrawing] = React.useState(false);
 
     const [cards, setCards] = React.useState([]);
     const cardsRef = React.useRef(cards);
@@ -93,10 +96,8 @@ export default function Game(props) {
     }
 
     if (isDeckUpdated === false) {
-        //get the deck from server
         setIsDeckUpdated(true)
-
-        const pResponse = getGame(gameId).then(response => {
+        getGame(gameId).then(response => {
             if (response.status === 200) {
                 if (response.data.message == "OK") {
                     if (response.data.body.status.toLowerCase().indexOf("ready") !== -1) {
@@ -115,18 +116,20 @@ export default function Game(props) {
                             dummyCards[card.cardPosition].selected = true;
                         }
                         setCards(dummyCards);
+                        setLastCard(getCardName(history[history.length - 1].card.value, history[history.length - 1].card.type));
                     }
                     return {status: true, data: response.data};
                 }
             }
             return {status: false, data: response.data};
-        }).catch(() => {
+        }).catch((error) => {
             props.history.push("/");
 
         });
 
     }
 
+    //TODO: Player should pick a card when after 3 seconds
     function cardUpdate(response) {
         var body = JSON.parse(response.body);
         var data = JSON.parse(body.data);
@@ -140,14 +143,19 @@ export default function Game(props) {
             newCards[cardId].cardName = cardName;
             newCards[cardId].selected = true;
             setCards(newCards);
+            setLastCard(cardName);
+
             let player = data.player;
-            updateMessage("bottom", player.name + " drawed the: " + selectedCard.valueName + " of " + selectedCard.type);
+            updateMessage("bottom", player.name + " drawd the: " + selectedCard.valueName + " of " + selectedCard.type);
         } else if (body.command === "TakeOne") {
             let player = data.player;
             updateMessage("top", "It's " + player.name + "'s turn now.");
+            setCurrentPlayer(player);
             setCurrentPlayerId(player.id);
         } else if (body.command === "TakeTwo") {
             let player = data.player;
+            setCurrentPlayer(player);
+
             updateMessage("top", player.name + " needs to pick 2 cards" +
                 " now.");
             setCurrentPlayerId(player.id);
@@ -173,17 +181,18 @@ export default function Game(props) {
 
 
     function drawCard(cardId) {
-        if (currentPlayerId !== null && currentPlayerId !== playerId)
+        if ((currentPlayerId !== null && currentPlayerId !== playerId) || isDrawing)
             return new Promise((resolve, reject) => {
                 resolve({status: false});
             });
-
+        setIsDrawing(true);
         const pResponse = axios({
             method: "POST",
             url: '/card/draw',
             params: {playerId: playerId, gameId: gameId, cardPosition: cardId},
             headers: {'Content-Type': 'application/json; charset=utf-8"'}
         }).then(response => {
+            setIsDrawing(false);
             if (response.status === 200) {
                 if (response.data.message === "Error") {
                     return {status: false, data: response.data};
@@ -191,7 +200,7 @@ export default function Game(props) {
                 return {status: true, data: response.data};
             }
             return {status: false, data: response.data};
-        });
+        }).catch(() => setIsDrawing(false));
 
         return pResponse;
     }
@@ -230,7 +239,8 @@ export default function Game(props) {
                         message={topInfoMessage}
                     />
                 </Snackbar>
-                <Board drawCard={drawCard} deck={cards} me={playerId}/>
+                <Board drawCard={drawCard} deck={cards} me={playerId} lastCard={lastCard}
+                       currentPlayer={currentPlayer}/>
                 <Snackbar
                     anchorOrigin={{
                         vertical: 'bottom',

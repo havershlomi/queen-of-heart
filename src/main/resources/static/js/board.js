@@ -4,7 +4,7 @@ import {getPlayer} from './utils';
 
 export default function Board(props) {
     const [playerName, setPlayerName] = React.useState(null);
-    //TODO: get player name here
+    let currentPlayer = !props.currentPlayer ? {"name": ""} : props.currentPlayer;
 
     if (playerName === null) {
         getPlayer(props.me).then(response => {
@@ -19,7 +19,11 @@ export default function Board(props) {
     return (
         <div className="board-container">
             <div className="header">
+                <label
+                    className={"turn-label"}>{(props.me === currentPlayer["id"]) ? "Your turn" : "Turn " + currentPlayer["name"]}</label>
                 <span>Hi, {playerName}</span>
+                <Card key={props.lastCard} cardId={props.lastCard} cardName={props.lastCard}
+                      selected={true}/>
             </div>
             <div className="board">
                 {props.deck.map(card => {

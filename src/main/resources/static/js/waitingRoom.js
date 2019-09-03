@@ -1,6 +1,6 @@
 import Snackbar from "@material-ui/core/Snackbar/Snackbar";
 
-const React = require('react');
+const React = require("react");
 const ReactDOM = require('react-dom');
 const axios = require('axios')
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
@@ -28,9 +28,13 @@ export default function WaitingRoom(props) {
 
     const [message, setMessage] = React.useState("");
     const [openErrorMessage, setOpenErrorMessage] = React.useState(false);
-
-
+    const shareLink = React.useRef(null);
     const values = queryString.parse(window.location.search);
+
+    React.useEffect(() => {
+        shareLink.current.focus();
+        shareLink.current.setSelectionRange(0, shareLink.current.value.length);
+    }, [shareLink]);
 
     if (playerId === null && values.msg === undefined) {
         //TODO: get this information from cookie
@@ -141,6 +145,11 @@ export default function WaitingRoom(props) {
         });
     }
 
+    const selectMe = (elm) => {
+        debugger;
+        elm.focus();
+    };
+
     return (
 
         <div>
@@ -148,7 +157,7 @@ export default function WaitingRoom(props) {
                 <h2>Who is going to play</h2>
                 <div>
                     <h3>Invite people to join</h3>
-                    <input className="share-link" type="text" readOnly
+                    <input onLoad={selectMe} ref={shareLink} className="share-link" type="text" readOnly
                            value={location.origin + "/player?game=" + gameId}/>
                 </div>
             </div>
