@@ -1,5 +1,6 @@
 package QueenOfHeart.model;
 
+import QueenOfHeart.logic.Actions.TakeTwo;
 import org.hibernate.annotations.GenericGenerator;
 import sun.net.www.content.text.PlainTextInputStream;
 
@@ -166,9 +167,11 @@ public class Game {
         Map<String, Object> dictionary = new HashMap<String, Object>();
         dictionary.put("name", this.name);
         dictionary.put("id", this.id);
-        dictionary.put("ceatorId", this.gameCreator == null ? null : this.gameCreator.getUuid());
+        dictionary.put("creatorId", this.gameCreator == null ? null : this.gameCreator.getUuid());
+        dictionary.put("creatorName", this.gameCreator == null ? null : this.gameCreator.getName());
         dictionary.put("status", this.status.toString());
         dictionary.put("history", this.getHistory());
+        dictionary.put("actions", this.getActions());
         return dictionary;
     }
 }
