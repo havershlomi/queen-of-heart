@@ -22,9 +22,10 @@ public class Rules {
 //        else if (cr.value == Rules.KING || cr.value == Rules.PRINCE) {
 //            selectedAction = GameAction.Actions.Punish;
 //        }
-        else if (cr.value == 3) {
-            selectedAction = GameAction.Actions.Take3Together;
-        } else if (cr.value == 7) {
+//        else if (cr.value == 3) {
+//            selectedAction = GameAction.Actions.Take3Together;
+//        }
+        else if (cr.value == 7) {
             selectedAction = GameAction.Actions.ChangeDirection;
         } else if (cr.value == 8) {
             selectedAction = GameAction.Actions.SkipNext;
