@@ -29,8 +29,7 @@ public class ActionManager {
         boolean shouldCheckNextAction = true;
 
         //Checks related to history
-        // In order to contol special cards we need to check the history
-        //TODO: handle 3 and jack pick
+        // In order to control special cards we need to check the history
         List<GameAction> actionHistory = game.getActions();
         if (actionHistory.size() != 0) {
             int levels = 2;
@@ -148,7 +147,6 @@ public class ActionManager {
                 playerIds.add(player.getUuid());
             }
         } else {
-            //TODO: refactor that better
             playerIds.add(currentPlayer.getUuid());
             Player nextPlayer;
             //1 a head

@@ -1,15 +1,9 @@
 package QueenOfHeart.model;
 
-import QueenOfHeart.logic.Actions.TakeTwo;
-import org.hibernate.annotations.GenericGenerator;
-import sun.net.www.content.text.PlainTextInputStream;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import org.hibernate.*;
 
 @Entity(name = "Game")
 @Table(name = "Games")

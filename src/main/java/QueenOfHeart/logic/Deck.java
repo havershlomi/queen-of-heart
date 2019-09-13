@@ -19,14 +19,12 @@ public class Deck {
 
     public Deck(List<Integer> usedCards) {
         this.availableCards = new ArrayList<>(_deck);
-        // TODO: Check if it works on refrences
         this.availableCards.removeAll(usedCards);
     }
 
     public int drawCard() {
         if (this.availableCards.size() == 0)
             return -1;
-        //TODO get the card from here
 
         Random rand = new Random();
         int index = rand.nextInt(this.availableCards.size());
