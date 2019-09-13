@@ -12,7 +12,7 @@ import MySnackbarContentWrapper from "./snack-bar";
 import {isGameValid, isPlayerValid, getGame} from './utils';
 
 const stompClient = require('./websocket-listener');
-
+const timePerTurnMs = 7000;
 export default function Game(props) {
     let [gameId, setGameId] = React.useState(null);
     const [currentPlayerId, setCurrentPlayerId] = React.useState(null);
@@ -94,8 +94,8 @@ export default function Game(props) {
                         let lastAction = game.actions[game.actions.length - 1];
                         if (lastAction.command === "QueenOfHeartPicked") {
                             let player = JSON.parse(lastAction.data).player;
+                            props.losingPlayer.current = player.name;
                             props.history.push("/?msg=game_over&playerName=" + player.name);
-
                         } else {
                             props.history.push("/");
                         }
@@ -159,8 +159,9 @@ export default function Game(props) {
             let cardId = data.cardId;
             let selectedCard = data.selectedCard;
             let cardName = getCardName(selectedCard.value, selectedCard.type);
-            let newCards = cardsRef.current.slice();
-            newCards[cardId] = Object.assign({}, newCards[cardId]);
+            // let newCards = cardsRef.current.slice();
+            let newCards = Object.assign([...cardsRef.current]);
+            // newCards[cardId] = Object.assign({}, newCards[cardId]);
             newCards[cardId].cardName = cardName;
             newCards[cardId].selected = true;
             setCards(newCards);
@@ -177,14 +178,17 @@ export default function Game(props) {
             let player = data.player;
             setCurrentPlayer(player);
             handleNextTurn(player.id);
-            updateMessage("top", player.name + " needs to pick 2 cards" +
-                " now.");
+            updateMessage("top", player.name + " needs to pick 2 cards now.");
             setCurrentPlayerId(player.id);
         } else if (body.command === "QueenOfHeartPicked") {
             let player = data.player;
             updateMessage("top", " Game ended " + player.name + " lost!!");
-            props.history.push("/?msg=game_over&playerName=" + player.name);
-            return;
+            setTimeout(() => {
+                props.losingPlayer.current = player.name;
+                props.history.push("/?msg=game_over&playerName=" + player.name);
+            }, 5000);
+            //Disable drawing for everybody
+            setIsDrawing(true);
         }
     }
 
@@ -200,7 +204,7 @@ export default function Game(props) {
                         break;
                     }
                 }
-            }, 3000);
+            }, timePerTurnMs);
             setAutoPickCard(token);
         }
     };
@@ -284,6 +288,7 @@ export default function Game(props) {
                     />
                 </Snackbar>
                 <Board drawCard={drawCard} deck={cards} me={props.playerId} lastCard={lastCard}
+                       timePerTurn={timePerTurnMs}
                        currentPlayer={currentPlayer}/>
                 <Snackbar
                     anchorOrigin={{

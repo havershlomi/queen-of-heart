@@ -11,6 +11,7 @@ import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import {getGame, getPlayer, isPlayerValid} from "./utils";
 import {createBrowserHistory} from "history";
 import Cookies from "universal-cookie";
+import Message from "./message";
 
 const customHistory = createBrowserHistory();
 
@@ -20,12 +21,16 @@ export default function App() {
     const [playerId, setPlayerId] = React.useState(null);
     const [gameName, setGameName] = React.useState(null);
     const [playerName, setPlayerName] = React.useState(null);
+    const [losingPlayerName, setLosingPlayerName] = React.useState(null);
     const gameRef = React.useRef(null);
     const playerRef = React.useRef(null);
+    const losingPlayerRef = React.useRef(null);
 
     const values = queryString.parse(window.location.search);
-    let losingPlayerName = values.playerName;
 
+    if (losingPlayerName === null && values.msg === "game_over" && values.playerName !== undefined) {
+        losingPlayerRef.current = values.playerName;
+    }
 
     React.useEffect(() => {
         if (gameRef.current !== gameId) {
@@ -140,7 +145,7 @@ export default function App() {
                 <div style={{textAlign: "center", marginTop: "10px"}}>
                     <Route path="/" exact render={({history}) => (
                         <div>
-                            {values.msg === "game_over" ? <h1>{losingPlayerName} lost</h1> : ""}
+                            <Message message={losingPlayerRef.current}/>
                             <FormDialog buttonName="Create game" header="Create game" confirmButton="Add"
                                         attributes={["Name"]}
                                         confirmedAction={(obj) => onGameCreate(obj, history)}/>
@@ -154,7 +159,8 @@ export default function App() {
                     <Route path="/waitingRoom"
                            render={({history}) => (
                                <WaitingRoom history={history} playerId={playerRef} gameId={gameRef}/>)}/>
-                    <Route path="/game" render={({history}) => (<Game history={history} playerId={playerRef}/>)}/>
+                    <Route path="/game" render={({history}) => (
+                        <Game history={history} playerId={playerRef} losingPlayer={losingPlayerRef}/>)}/>
                 </div>
             </Router>
         </div>
