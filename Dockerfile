@@ -4,9 +4,7 @@ FROM openjdk:8-jdk-alpine as build
 # Set the current working directory inside the image
 WORKDIR /app
 
-# Copy maven executable to the image
-#COPY mvnw .
-#COPY .mvn .mvn
+# Install maven executable to the image
 
 ENV MAVEN_HOME=/usr/share/maven
 
@@ -24,13 +22,6 @@ RUN cd /tmp \
 
 ENV MVN=$MAVEN_HOME/bin/mvn
 
-#RUN apt-get install git-core curl build-essential openssl libssl-dev \
-# && git clone https://github.com/nodejs/node.git \
-# && cd node \
-# && ./configure \
-# && make \
-# && sudo make install
-
 # Copy the pom.xml file
 COPY pom.xml .
 
@@ -41,7 +32,6 @@ RUN $MVN dependency:go-offline -B
 
 # Copy the project source
 COPY src src
-COPY package.json ./webpack.config.js ./
 
 # Package the application
 RUN $MVN package -DskipTests
@@ -57,4 +47,4 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
-ENTRYPOINT ["java","-cp","app:app/lib/*","com.example.polls.PollsApplication"]
+ENTRYPOINT ["java","-cp","app:app/lib/*","QueenOfHeart.Application"]
