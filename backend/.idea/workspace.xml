@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="26d05928-8507-4f65-bf41-7838e9b2a2f1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/acorn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/atob" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/browserslist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/errno" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/import-local-fixture" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/jsesc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/json5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/loose-envify" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/miller-rabin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/mkdirp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/parser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/regexp-tree" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/regjsparser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/rimraf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/semver" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/sha.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/terser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/webpack" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/webpack-cli" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/which" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../queenofheart.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/WebConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/WebSocketConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/controller/CardController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/controller/GameController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/controller/IndexController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/controller/PlayerController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/controller/Response.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/ActionManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Actions/BaseAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Actions/CardDraw.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Actions/ErrorAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Actions/GameEnd.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Actions/Punish.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Actions/Skip.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Actions/Take3Together.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Actions/TakeOne.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Actions/TakeTwo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Card.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/CardType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Deck.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Rules.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/model/Game.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/model/GameAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/model/GamePlayHistory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/model/GameStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/model/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/model/Utils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/repository/IActionRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/repository/IGameRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/repository/IPlayerRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/META-INF/persistence.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/hibernate.cfg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/blue_back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/10C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/10D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/10H.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/10S.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/2C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/2D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/2H.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/2S.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/3C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/3D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/3H.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/3S.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/4C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/4D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/4H.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/4S.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/5C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/5D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/5H.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/5S.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/6C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/6D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/6H.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/6S.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/7C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/7D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/7H.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/7S.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/8C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/8D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/8H.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/8S.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/9C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/9D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/9H.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/9S.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/AC.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/AD.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/AH.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/AS.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/JC.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/JD.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/JH.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/JS.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/KC.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/KD.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/KH.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/KS.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/QC.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/QD.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/QH.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/QS.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/blue_back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/gray_back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/green_back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/purple_back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/red_back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/yellow_back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/sprite_cards.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/built/bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/css/cards.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/css/game.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/css/game.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/css/game.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/board.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/button-app-bar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/card.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/game.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/material-dialog.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/message.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/snack-bar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/utils.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/waitingRoom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/websocket-listener.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/resources/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webpack.config.js" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/src/main/resources/static/built/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1279402478">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="queen-of-heart" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1680" />
+    <option name="height" value="1050" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="queen-of-heart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="queen-of-heart" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="QueenOfHeart.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#PerlRemoteDebuggingConfigurationType" factoryName="Perl Remote Debugging" show_console_on_std_err="false" show_console_on_std_out="false">
+      <option name="compileTimeBreakpointsEnabled" value="false" />
+      <option name="nonInteractiveModeEnabled" value="false" />
+      <option name="debugHost" value="localhost" />
+      <option name="debugPort" value="9000" />
+      <option name="remoteProjectRoot" value="/usr/local/git_tree/main" />
+      <option name="scriptCharset" value="utf8" />
+      <option name="perlRole" value="client" />
+      <option name="startMode" value="BREAKPOINT" />
+      <option name="isNonInteractiveModeEnabled" value="false" />
+      <option name="isCompileTimeBreakpointsEnabled" value="false" />
+      <option name="initCode" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="26d05928-8507-4f65-bf41-7838e9b2a2f1" name="Default Changelist" comment="" />
+      <created>1568660602928</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1568660602928</updated>
+      <workItem from="1568660609131" duration="223000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="223000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <layout>
+      <window_info id="Designer" />
+      <window_info id="Image Layers" />
+      <window_info id="Capture Tool" />
+      <window_info id="UI Designer" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info id="Web" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24969475" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Spring" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.32959184" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" />
+      <window_info anchor="bottom" id="Java Enterprise" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32959184" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Maven Projects" visible="true" weight="0.32967034" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Bean Validation" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
