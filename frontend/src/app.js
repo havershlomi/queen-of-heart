@@ -31,6 +31,9 @@ export default function App() {
     //     axios.defaults.baseURL = window.location.origin.substr(0, window.location.origin.lastIndexOf(":" + window.location.port)) + ":8080";
     // }
 
+    // axios.defaults.baseURL = window.location.protocol + "//" + window.location.hostname + ":8080";
+
+
     axios.defaults.baseURL = window._env_.API_URL;
 
     if (losingPlayerRef.current === null && values.msg === "game_over" && values.playerName !== undefined) {
