@@ -2,145 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="26d05928-8507-4f65-bf41-7838e9b2a2f1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/acorn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/atob" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/browserslist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/errno" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/import-local-fixture" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/jsesc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/json5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/loose-envify" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/miller-rabin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/mkdirp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/parser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/regexp-tree" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/regjsparser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/rimraf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/semver" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/sha.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/terser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/webpack" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/webpack-cli" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../node_modules/.bin/which" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../queenofheart.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/Application.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/WebConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/WebSocketConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/controller/CardController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/controller/GameController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/controller/IndexController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/controller/PlayerController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/controller/Response.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/ActionManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Actions/BaseAction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Actions/CardDraw.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Actions/ErrorAction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Actions/GameEnd.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Actions/Punish.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Actions/Skip.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Actions/Take3Together.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Actions/TakeOne.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Actions/TakeTwo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Card.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/CardType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Deck.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/logic/Rules.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/model/Game.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/model/GameAction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/model/GamePlayHistory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/model/GameStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/model/Player.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/model/Utils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/repository/IActionRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/repository/IGameRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/QueenOfHeart/repository/IPlayerRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/META-INF/persistence.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/hibernate.cfg.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/blue_back.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/10C.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/10D.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/10H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/10S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/2C.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/2D.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/2H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/2S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/3C.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/3D.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/3H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/3S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/4C.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/4D.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/4H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/4S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/5C.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/5D.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/5H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/5S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/6C.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/6D.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/6H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/6S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/7C.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/7D.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/7H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/7S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/8C.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/8D.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/8H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/8S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/9C.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/9D.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/9H.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/9S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/AC.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/AD.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/AH.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/AS.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/JC.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/JD.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/JH.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/JS.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/KC.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/KD.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/KH.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/KS.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/QC.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/QD.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/QH.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/QS.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/blue_back.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/gray_back.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/green_back.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/purple_back.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/red_back.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/cards/yellow_back.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/assets/sprite_cards.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/built/bundle.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/css/cards.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/css/game.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/css/game.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/css/game.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/board.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/button-app-bar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/card.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/game.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/material-dialog.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/message.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/snack-bar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/utils.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/waitingRoom.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/static/js/websocket-listener.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/templates/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../webpack.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/websocket-listener.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/websocket-listener.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/src/main/resources/static/built/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -154,11 +19,55 @@
     <session id="-1279402478">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.20" value="1" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="iml" value="1" />
+          <entry key="json" value="2" />
+          <entry key="properties" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="IDEA_MODULE" value="1" />
+          <entry key="JSON" value="2" />
+          <entry key="Properties" value="1" />
         </counts>
       </usages-collector>
     </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/queen-of-heart.iml">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package-lock.json">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="38" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -180,9 +89,15 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
     <option name="width" value="1680" />
-    <option name="height" value="1050" />
+    <option name="height" value="956" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -198,12 +113,45 @@
               <item name="queen-of-heart" type="b2602c69:ProjectViewProjectNode" />
               <item name="backend" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="queen-of-heart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="queen-of-heart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="queen-of-heart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="queen-of-heart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="queen-of-heart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -262,32 +210,26 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1568660602928</updated>
-      <workItem from="1568660609131" duration="223000" />
+      <workItem from="1568660609131" duration="2396000" />
+      <workItem from="1568717459730" duration="1576000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="223000" />
+    <option name="totallyTimeSpent" value="3972000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <frame x="0" y="23" width="1680" height="956" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Designer" />
-      <window_info id="Image Layers" />
-      <window_info id="Capture Tool" />
-      <window_info id="UI Designer" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info id="Web" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24969475" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25274727" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Spring" />
-      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.32959184" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" />
-      <window_info anchor="bottom" id="Java Enterprise" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32959184" />
@@ -295,16 +237,24 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Maven Projects" visible="true" weight="0.32967034" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Bean Validation" />
+      <window_info anchor="bottom" id="Spring" order="7" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3738426" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="11" />
+      <window_info anchor="bottom" id="Java Enterprise" order="12" />
+      <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="14" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="5" visible="true" weight="0.32967034" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Bean Validation" order="9" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,6 +262,24 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/queen-of-heart.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package-lock.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="38" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="masterDetails">
     <states>
