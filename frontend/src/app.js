@@ -25,11 +25,13 @@ export default function App() {
 
     const values = queryString.parse(window.location.search);
 
-    if (window.location.port.length === 0) {
-        axios.defaults.baseURL = window.location.origin;
-    } else {
-        axios.defaults.baseURL = window.location.origin.substr(0, window.location.origin.lastIndexOf(":" + window.location.port)) + ":8080";
-    }
+    // if (window.location.port.length === 0) {
+    //     axios.defaults.baseURL = window.location.origin;
+    // } else {
+    //     axios.defaults.baseURL = window.location.origin.substr(0, window.location.origin.lastIndexOf(":" + window.location.port)) + ":8080";
+    // }
+
+    axios.defaults.baseURL = window._env_.API_URL;
 
     if (losingPlayerRef.current === null && values.msg === "game_over" && values.playerName !== undefined) {
         losingPlayerRef.current = values.playerName;

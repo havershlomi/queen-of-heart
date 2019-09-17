@@ -3,7 +3,7 @@ const Stomp = require('stompjs');
 
 function register(registrations) {
     const socket = SockJS(
-        'http://localhost:8080/cards',
+        window._env_.WS_url + "/cards"
     );
     const stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {

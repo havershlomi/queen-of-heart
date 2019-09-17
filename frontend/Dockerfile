@@ -11,10 +11,11 @@ WORKDIR /app
 # will be cached unless changes to one of those two files
 # are made.
 COPY package.json package-lock.json ./
+COPY ./src ./src
+COPY ./public ./public
+
 RUN npm install
 
-# Copy the main application
-COPY . ./
 
 # Arguments
 ARG REACT_APP_API_BASE_URL
@@ -36,4 +37,19 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # from the outside.
 EXPOSE 80
 
-ENTRYPOINT ["nginx","-g","daemon off;"]
+WORKDIR /usr/share/nginx/html
+COPY ./env.sh .
+COPY .env .
+
+# Add bash
+RUN apk add --no-cache bash
+
+# Make our shell script executable
+RUN chmod +x env.sh
+
+
+CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
+
+#ENTRYPOINT ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && nginx -g daemon off;"]
+
+#ENTRYPOINT ["nginx","-g","daemon off;"]
