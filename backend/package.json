@@ -27,7 +27,6 @@
     "universal-cookie": "^4.0.2"
   },
   "scripts": {
-    "watch": "webpack --watch -d"
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",
